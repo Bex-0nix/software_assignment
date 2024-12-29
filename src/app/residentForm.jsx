@@ -78,7 +78,7 @@ export default function ResidentForm({type, residents, handleSubmit}){
                 <h1>{type} Resident</h1>
                 <br />
                 <form action="">
-                    <label htmlFor="">id</label>
+                    <label htmlFor="">id: </label>
                     <input required type="text" name="id" value={inputState.id} onChange={(e) => {setInputState({...inputState, id: e.target.value})}}/>
                     <br />
                     
@@ -115,76 +115,13 @@ function MoreData({disabled, editable, fetchedResident, setFetchedResident, inpu
 
     return(
         <>
-            {/* {data.map((d) => {
-                
-            })} */}
-            <label htmlFor="">fullName</label>
-            <input required disabled={disabled && !editable} type="text" name="fullName" value={(fetchedResident?.fullName ?? "")} onChange={(e) => {!disabled ? setInputState({...inputState, fullName : e.target.value}) : setFetchedResident({...fetchedResident, fullName : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">dateOfBirth</label>
-            <input required disabled={disabled && !editable} type="text" name="dateOfBirth" value={(fetchedResident?.dateOfBirth ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, dateOfBirth : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">gender</label>
-            <input required disabled={disabled && !editable} type="text" name="gender" value={(fetchedResident?.gender ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, gender : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">maritalStatus</label>
-            <input required disabled={disabled && !editable} type="text" name="maritalStatus" value={(fetchedResident?.maritalStatus ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, maritalStatus : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">nationality</label>
-            <input required disabled={disabled && !editable} type="text" name="nationality" value={(fetchedResident?.nationality ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, nationality : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">address</label>
-            <input required disabled={disabled && !editable} type="text" name="address" value={(fetchedResident?.address ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, address : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">phoneNumber</label>
-            <input required disabled={disabled && !editable} type="text" name="phoneNumber" value={(fetchedResident?.phoneNumber ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, phoneNumber : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">emailAddress</label>
-            <input required disabled={disabled && !editable} type="text" name="emailAddress" value={(fetchedResident?.emailAddress ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, emailAddress : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">motherName</label>
-            <input required disabled={disabled && !editable} type="text" name="motherName" value={(fetchedResident?.motherName ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, motherName : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">fatherName</label>
-            <input required disabled={disabled && !editable} type="text" name="fatherName" value={(fetchedResident?.fatherName ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, fatherName : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">spouseName</label>
-            <input required disabled={disabled && !editable} type="text" name="spouseName" value={(fetchedResident?.spouseName ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, spouseName : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">numberOfDependents</label>
-            <input required disabled={disabled && !editable} type="text" name="numberOfDependents" value={(fetchedResident?.numberOfDependents ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, numberOfDependents : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">emergencyContactName</label>
-            <input required disabled={disabled && !editable} type="text" name="emergencyContactName" value={(fetchedResident?.emergencyContactName ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, emergencyContactName : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">emergencyContactRelationship</label>
-            <input required disabled={disabled && !editable} type="text" name="emergencyContactRelationship" value={(fetchedResident?.emergencyContactRelationship ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, emergencyContactRelationship : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">emergencyContactPhoneNumber</label>
-            <input required disabled={disabled && !editable} type="text" name="emergencyContactPhoneNumber" value={(fetchedResident?.emergencyContactPhoneNumber ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, emergencyContactPhoneNumber : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">disabilityStatus</label>
-            <input required disabled={disabled && !editable} type="text" name="disabilityStatus" value={(fetchedResident?.disabilityStatus ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, disabilityStatus : e.target.value})}}/>
-            <br />
-
-            <label htmlFor="">dateOfRegistration</label>
-            <input required disabled={disabled && !editable} type="text" name="dateOfRegistration" value={(fetchedResident?.dateOfRegistration ?? "")} onChange={(e) => {!disabled && setInputState({...inputState, dateOfRegistration : e.target.value})}}/>
-            <br />
-        </>
+            {data.map((d, index) => (        
+                <div key={index}>        
+                    <label htmlFor="">{d}: </label>
+                    <input required disabled={disabled && !editable} type="text" name={d} value={(fetchedResident?.[d] ?? "")} onChange={(e) => {!editable ? setInputState({...inputState, [d] : e.target.value}) : setFetchedResident({...fetchedResident, [d] : e.target.value})}}/>
+                    <br />
+                </div>
+            ))}
+        </> 
     )
 }

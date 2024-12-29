@@ -5,7 +5,7 @@ export default function HomePage({page}){
 
     return (
         <>
-            {page == "Admin" ? (<AdminInterface />) : null}
+            {page == "Admin" ? <AdminInterface /> : <ResidentInterface />}
         </>
     )
 }

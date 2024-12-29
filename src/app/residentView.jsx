@@ -7,17 +7,13 @@ function handleSubmit(event, type, residents){
         
     }
     else if (type == "Add"){
-        const blob = new Blob([JSON.stringify(residents, null, residents.length)], { type: 'application/json' });
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = './residents.JSON';
-        link.click();
+        // add to db
     }
     else if (type == "Edit"){
-        
+        // edit db
     }
     else if (type == "Remove"){
-        
+        //remove from db
     }
 }
 

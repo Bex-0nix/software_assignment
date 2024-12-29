@@ -23,7 +23,7 @@ export default function StatefulContainerContext({children, isMain}){
     }
 
     function updateContent(content, color){
-        setMainContent(content || '');
+        setMainContent(content || <>empty</>);
         // animate(color);
     }
 
@@ -37,7 +37,7 @@ export default function StatefulContainerContext({children, isMain}){
                     {children}
                 </div>
                 <div ref={main} className={isMain? "main_content main_main_content" : "main_content"}>
-                    {mainContent ? mainContent : "empty"}
+                    {mainContent}
                 </div>
             </div>
         </statefulContainerContext.Provider>

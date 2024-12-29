@@ -1,0 +1,21 @@
+nav{
+    position: fixed;
+    display: flex;
+    top: 0;
+    width: 100vw;
+    height: 10vh;
+    align-items: center;
+    background-color: rgba(67, 78, 77, 0.63);
+    z-index: 100;
+}
+a{
+    margin: 20px;
+    text-decoration: none;
+    color: black;
+}
+/* ul{
+    display: flex;
+    gap: 10 0px;
+    position: fixed;
+    right: 50px;
+} */

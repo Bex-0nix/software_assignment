@@ -65,9 +65,12 @@ export default function ResidentForm({type, residents, handleSubmit}){
     })
     
     function saveData() {
+        for (let resident of residents){
+            if (resident["id"] == inputState["id"]) return false;
+        }
         data.unshift("id");
         for (let d of data) {
-            if (inputState[d] === "") {
+            if (inputState[d] == "") {
                 data.shift()
                 return false;
             }
@@ -116,8 +119,6 @@ export default function ResidentForm({type, residents, handleSubmit}){
 
 function MoreData({disabled, editable, fetchedResident, setFetchedResident, inputState, setInputState}){
     
-    data
-
     return(
         <>
             {data.map((d, index) => (        

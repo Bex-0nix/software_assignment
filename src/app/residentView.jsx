@@ -24,7 +24,7 @@ export default function ResidentView({type}){
             {type == "Add" || type == "Edit" || type == "Remove" ? (
                 <ResidentForm type={type} handleSubmit={handleSubmit} residents={residents}/>
             ) 
-            : 
+            :
             (
                 <ResidentList residents={residents} handleSubmit={handleSubmit} />
             )}

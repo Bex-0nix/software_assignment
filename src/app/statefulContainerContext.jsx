@@ -8,6 +8,7 @@ document.head.appendChild(keyframes);
 export default function StatefulContainerContext({children, isMain}){
     
     const [mainContent, setMainContent] = useState(null);
+    const [activeButton, setActiveButton] = useState(null);
     const [contents, setContents] = useState({});
     const [animationColor, setAnimationColor] = useState('purple')
     const main = useRef();
@@ -27,11 +28,16 @@ export default function StatefulContainerContext({children, isMain}){
         // animate(color);
     }
 
+    function updateActiveButton(button){
+        if (activeButton) activeButton.classList.remove('active')
+        setActiveButton(button);
+        activeButton.classList.add('active');
+    }
     const parentContext = useContext(statefulContainerContext);
     const providerRef = parentContext ? parentContext : null;
 
     return (
-        <statefulContainerContext.Provider value={{setContent: updateContent, mainContent, contents, colors, providerRef}}>
+        <statefulContainerContext.Provider value={{setContent: updateContent, setActiveButton: updateActiveButton, activeButton, mainContent, contents, colors, providerRef}}>
             <div className={isMain ? "stateful_container main_stateful_container" : "stateful_container"}>
                 <div className={isMain ? "links main_links" : "links"}>
                     {children}

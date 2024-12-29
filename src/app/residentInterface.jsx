@@ -14,7 +14,7 @@ export default function ResidentInterface(){
 
                         </State>
                         <State title="Cancel Appointment">
-
+                            
                         </State>
                     </StatefulContainer>
                 </State>

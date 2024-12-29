@@ -2,12 +2,13 @@ import ResidentForm from './residentForm'
 import ResidentList from './residentList'
 import residents from './residents.JSON'
 
-function handleSubmit(event, type, residents){
+function handleSubmit(event, type, resident){
     if (type == "List"){
         
     }
     else if (type == "Add"){
         // add to db
+        residents.push(resident)
     }
     else if (type == "Edit"){
         // edit db

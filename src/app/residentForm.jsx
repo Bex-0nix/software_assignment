@@ -2,7 +2,6 @@ import { useState } from "react"
 
 const resident = {};
 const data = [
-    "id",
     "fullName",
     "dateOfBirth",
     "gender",
@@ -65,11 +64,17 @@ export default function ResidentForm({type, residents, handleSubmit}){
         dateOfRegistration: ""
     })
     
-    function saveData(){
-        data.some((d) => {
-            resident[d] = inputState[d]; if (inputState[d] == "") return false;
-        });
-        return true;   
+    function saveData() {
+        data.unshift("id");
+        for (let d of data) {
+            if (inputState[d] === "") {
+                data.shift()
+                return false;
+            }
+            resident[d] = inputState[d];
+        }
+        data.shift()
+        return true;
     }
     
     return (
@@ -97,12 +102,12 @@ export default function ResidentForm({type, residents, handleSubmit}){
                         : 
                         (
                             <>
-                            <MoreData disabled={false} inputState={inputState} setInputState={setInputState}/>
+                            <MoreData disabled={false} editable={false} inputState={inputState} setInputState={setInputState}/>
                             <br />           
                         </>
                     )}
 
-                    <input type="submit" value="submit" onClick={(e) => {saveData() ? handleSubmit(e, type, resident) : e.preventDefault()}}/>
+                    <input type="submit" value="submit" onClick={(e) => {saveData() ? handleSubmit(e, type, resident) : null; e.preventDefault()}}/>
                 </form>
             </div>
         </>
@@ -118,7 +123,7 @@ function MoreData({disabled, editable, fetchedResident, setFetchedResident, inpu
             {data.map((d, index) => (        
                 <div key={index}>        
                     <label htmlFor="">{d}: </label>
-                    <input required disabled={disabled && !editable} type="text" name={d} value={(fetchedResident?.[d] ?? "")} onChange={(e) => {!editable ? setInputState({...inputState, [d] : e.target.value}) : setFetchedResident({...fetchedResident, [d] : e.target.value})}}/>
+                    <input required disabled={disabled && !editable} type="text" name={d} value={(!editable && !disabled ? inputState[d] : fetchedResident?.[d] ?? "")} onChange={(e) => {!editable && !disabled ? setInputState({...inputState, [d] : e.target.value}) : setFetchedResident({...fetchedResident, [d] : e.target.value})}}/>
                     <br />
                 </div>
             ))}

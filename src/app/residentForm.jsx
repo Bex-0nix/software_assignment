@@ -71,7 +71,7 @@ export default function ResidentForm({type, residents, handleSubmit}){
                 data.shift()
                 return false;
             }
-            resident[d] = inputState[d];
+            resident[d] = inputState[d];  
         }
         data.shift()
         return true;

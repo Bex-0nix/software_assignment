@@ -4,23 +4,35 @@
         "startTime": "",
         "endTime": "",
         "interval" : "",
-        "slots": [
+        "timeSlots" : [
+            
+        ],
+        "slotData": [
             {
                 "date": "",
-                "dailySlots": []
+                "dailySlots": [
+
+                ]
             }
-        ]
+        ],
+        "lastUpdate" : ""
     },
     {
         "service": "idIssue",
         "startTime": "",
         "endTime": "",
         "interval" : "",
-        "slots": [
+        "timeSlots" : [
+
+        ],
+        "slotData": [
             {
                 "date": "",
-                "dailySlots": []
+                "dailySlots": [
+                    
+                ]
             }
-        ]
+        ],
+        "lastUpdate" : ""
     }
 ]

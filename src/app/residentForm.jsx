@@ -1,29 +1,29 @@
 import { useState } from "react"
+import Alert from "./alert";
 
 const resident = {};
 const data = [
-    "fullName",
-    "dateOfBirth",
-    "gender",
-    "maritalStatus",
-    "nationality",
-    "address",
-    "phoneNumber",
-    "emailAddress",
-    "motherName",
-    "fatherName",
-    "spouseName",
-    "numberOfDependents",
-    "emergencyContactName",
-    "emergencyContactRelationship",
-    "emergencyContactPhoneNumber",
-    "disabilityStatus",
-    "dateOfRegistration",
+    ["fullName" , "Full Name"],
+    ["dateOfBirth" , "Birth Date"],
+    ["gender" , "Gender"],
+    ["maritalStatus" , "Marital Status"],
+    ["nationality" , "Nationality"],
+    ["address" , "Address"],
+    ["phoneNumber" , "Phone Number"],
+    ["emailAddress" , "Email"],
+    ["motherName" , "Mother's Name"],
+    ["fatherName" , "Father's Name"],
+    ["spouseName" , "Spouse's Name"],
+    ["numberOfDependents" , "Number Of Dependents"],
+    ["emergencyContactName" , "Emergency Contact"],
+    ["emergencyContactRelationship" , "Emergency Contact Relationship"],
+    ["emergencyContactPhoneNumber" , "Emergency Contact Number"],
+    ["disabilityStatus" , "Disability Status"],
+    ["dateOfRegistration" , "Registration Date"]
 ]
 
 export default function ResidentForm({type, residents, handleSubmit}){
     const [fetchedResident, setFetchedResident] = useState({
-        id: "",
         fullName: "",
         dateOfBirth: "",
         gender: "",
@@ -64,17 +64,23 @@ export default function ResidentForm({type, residents, handleSubmit}){
         dateOfRegistration: ""
     })
     
+    const [alertContent, setAlertContent] = useState(null);
+
     function saveData() {
         for (let resident of residents){
-            if (resident["id"] == inputState["id"]) return false;
+            if (resident["id"] == inputState["id"]) {
+                setAlertContent(<><Alert title="Form Alert" message="Duplicate ID" setAlertContent={setAlertContent}/></>);
+                return false;
+            }
         }
         data.unshift("id");
         for (let d of data) {
-            if (inputState[d] == "") {
+            if (inputState[d[0]] == "") {
                 data.shift()
+                setAlertContent(<><Alert title="Form Alert" message="Missing Input" setAlertContent={setAlertContent}/></>);
                 return false;
             }
-            resident[d] = inputState[d];  
+            resident[d[0]] = inputState[d[0]];  
         }
         data.shift()
         return true;
@@ -82,26 +88,27 @@ export default function ResidentForm({type, residents, handleSubmit}){
     
     return (
         <>
-            <div className="appointment_form">
+            {alertContent}
+            <div className="form resident_form">
                 <h1>{type} Resident</h1>
                 <br />
                 <form action="">
-                    <label htmlFor="">id: </label>
+                    <label htmlFor="">ID: </label>
                     <input required type="text" name="id" value={inputState.id} onChange={(e) => {setInputState({...inputState, id: e.target.value})}}/>
                     <br />
                     
-                    { type == "Remove" || type == "Edit"? 
+                    { type == "Remove" || type == "Edit" ? 
                         (
                         <>
                             <button onClick={(e) => {
                                 setFetchedResident(residents[residents.findIndex(resident => resident["id"] == inputState.id)])
-                                console.log(fetchedResident);
+                                if (inputState.id == "") setAlertContent(<Alert title="Form Error" message="Invalid ID" setAlertContent={setAlertContent}/>) 
                                 e.preventDefault()
-                            }}>Find</button>
+                            }}>Search</button>
                             <br />           
                             <MoreData disabled={type == "Remove" ? true : false} editable={type == "Edit" ? true : false} fetchedResident={fetchedResident} setFetchedResident={setFetchedResident} inputState={inputState} setInputState={setInputState}/>   
                         </>
-                        ) 
+                        )  
                         : 
                         (
                             <>
@@ -110,7 +117,7 @@ export default function ResidentForm({type, residents, handleSubmit}){
                         </>
                     )}
 
-                    <input type="submit" value="submit" onClick={(e) => {saveData() ? handleSubmit(e, type, resident) : null; e.preventDefault()}}/>
+                    <input type="submit" value="submit" onClick={(e) => {saveData() ? handleSubmit(e, type, resident) :  e.preventDefault();}}/>
                 </form>
             </div>
         </>
@@ -123,8 +130,8 @@ function MoreData({disabled, editable, fetchedResident, setFetchedResident, inpu
         <>
             {data.map((d, index) => (        
                 <div key={index}>        
-                    <label htmlFor="">{d}: </label>
-                    <input required disabled={disabled && !editable} type="text" name={d} value={(!editable && !disabled ? inputState[d] : fetchedResident?.[d] ?? "")} onChange={(e) => {!editable && !disabled ? setInputState({...inputState, [d] : e.target.value}) : setFetchedResident({...fetchedResident, [d] : e.target.value})}}/>
+                    <label htmlFor="">{d[1]}: </label>
+                    <input required disabled={disabled && !editable} type="text" name={d[0]} value={(!editable && !disabled ? inputState[d[0]] : fetchedResident?.[d[0]]?? "")} onChange={(e) => {!editable && !disabled ? setInputState({...inputState, [d[0]] : e.target.value}) : setFetchedResident({...fetchedResident, [d[0]] : e.target.value})}}/>
                     <br />
                 </div>
             ))}

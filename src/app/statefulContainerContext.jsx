@@ -2,8 +2,8 @@ import {createContext, useState, useContext, useRef} from 'react';
 
 const statefulContainerContext = createContext();
 
-const keyframes = document.createElement('style');
-document.head.appendChild(keyframes);
+// const keyframes = document.createElement('style');
+// document.head.appendChild(keyframes);
 
 export default function StatefulContainerContext({children, isMain}){
     
@@ -14,7 +14,7 @@ export default function StatefulContainerContext({children, isMain}){
     const main = useRef();
 
     const colors = ["transparent", "transparent", "transparent", "#a881af", "#dd7973", "#ffbd03", "#ED0800", "#5783db", "#33b249", "#80669d", "#5adbb5", "#55c2da"];
-    keyframes.innerHTML = `@keyframes changeBg {0%{background-color: rgba(240, 255, 255, 0.562)}30%{background-color: ${animationColor}}100%{background-color: rgba(240, 255, 255, 0.562)}}`
+    // keyframes.innerHTML = `@keyframes changeBg {0%{background-color: rgba(240, 255, 255, 0.562)}30%{background-color: ${animationColor}}100%{background-color: rgba(240, 255, 255, 0.562)}}`
 
     function animate(color){
         setAnimationColor(color);
@@ -29,9 +29,9 @@ export default function StatefulContainerContext({children, isMain}){
     }
 
     function updateActiveButton(button){
-        if (activeButton) activeButton.classList.remove('active')
-        setActiveButton(button);
-        activeButton.classList.add('active');
+        // if (activeButton) activeButton.classList.remove('active')
+        // setActiveButton(button);
+        // activeButton.classList.add('active');
     }
     const parentContext = useContext(statefulContainerContext);
     const providerRef = parentContext ? parentContext : null;

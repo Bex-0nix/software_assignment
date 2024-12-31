@@ -1,3 +1,3 @@
-export default function Feedback(){
+export default function FeedbackView(){
     
 }

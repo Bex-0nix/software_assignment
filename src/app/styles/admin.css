@@ -1,0 +1,35 @@
+body, html{
+    overflow: hidden;
+}
+*{
+    padding: 0;
+    margin: 0;
+}
+.alert{
+    position: fixed;
+    height: 100px;
+    width: 200px;
+    top: calc(50% - 50px);
+    left: calc(50% - 100px);
+    background-color: black;
+}
+.alert::before{
+    content: '';
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.3);
+    z-index: -1;
+    pointer-events: none;
+}
+.alert *{
+    text-align: center;
+}
+.alert_title{
+    pointer-events: none;
+}
+.alert_message{
+    pointer-events: none;
+}

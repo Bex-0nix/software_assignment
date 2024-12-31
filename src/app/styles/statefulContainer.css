@@ -6,7 +6,7 @@
 .main_stateful_container{
     height: 100vh;
     width: 100vw;
-    background-image: url(./images/appointment-bg.jpg);
+    background-image: url(../images/appointment-bg.jpg);
     background-size: cover;
 }
 .links{
@@ -79,6 +79,14 @@
     background-color: rgba(0, 0, 0, 0.459);
     z-index: 0;
     backdrop-filter: blur(20px);
+}
+.alert{
+    position: fixed;
+    height: 100px;
+    width: 200px;
+    top: calc(50% - 50px);
+    left: calc(50% - 100px);
+    background-color: black;
 }
 ::-webkit-scrollbar{
     width: 0px;

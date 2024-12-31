@@ -1,0 +1,26 @@
+[
+    {
+        "service": "certificateIssue",
+        "startTime": "",
+        "endTime": "",
+        "interval" : "",
+        "slots": [
+            {
+                "date": "",
+                "dailySlots": []
+            }
+        ]
+    },
+    {
+        "service": "idIssue",
+        "startTime": "",
+        "endTime": "",
+        "interval" : "",
+        "slots": [
+            {
+                "date": "",
+                "dailySlots": []
+            }
+        ]
+    }
+]

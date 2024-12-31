@@ -1,13 +1,15 @@
-import ResidentView from "./residentView"
-import StatefulContainer from "./statefulContainer"
-import State from "./state"
+import ResidentView from "@/app/residentView"
+import StatefulContainer from "@/app/statefulContainer"
+import State from "@/app/state"
+import TimeSlotForm from "@/app/timeSlotForm"
+import '../src/app/styles/admin.css'
 
 export default function AdminInterface(){
 
     return (
         <>
             <StatefulContainer isMain={true}>
-                <State title="manage residents">
+                <State title="Residents">
                     <StatefulContainer>
                         <State title="List Resident">
                             <ResidentView type="List"/>
@@ -23,7 +25,10 @@ export default function AdminInterface(){
                         </State>
                     </StatefulContainer>
                 </State>
-                <State title="feedbacks">
+                <State title="Timeslots">
+                    <TimeSlotForm />
+                </State>
+                <State title="Feedbacks">
                     <StatefulContainer>
                         <State title="new">
                             new

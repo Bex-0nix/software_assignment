@@ -1,6 +1,6 @@
 import StatefulContainerContent from './statefulContainerContent';
 import StatefulContainerContext from './statefulContainerContext';
-import './statefulContainer.css'
+import './styles/statefulContainer.css'
 
 export default function StatefulContainer({children, isMain = false}){
     return (

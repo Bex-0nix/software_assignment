@@ -4,6 +4,7 @@ export default function Alert({title, message, setAlertContent}){
     const alertBox = useRef();
 
     function handleAlert(e){
+        e.preventDefault();
         if (alertBox.current && e.target !== alertBox.current){
             setAlertContent(null);
         }

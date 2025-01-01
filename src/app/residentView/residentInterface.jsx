@@ -1,17 +1,18 @@
-import StatefulContainer from "./statefulContainer"
-import State from "./state"
+import StatefulContainer from "../statefulContainer/statefulContainer"
+import State from "../statefulContainer/state"
 import AppointmentForm from "./appointmentForm"
 
 export default function ResidentInterface(){
 
     function handleSubmit(event, type, appointment){
-        if (add == "Make"){
+        event.preventDefault();
+        if (type == "Make"){
             
         }
-        else if (add == "Edit"){
+        else if (type == "Edit"){
 
         }
-        else if (add == "Cancel"){
+        else if (type == "Cancel"){
 
         }
     }

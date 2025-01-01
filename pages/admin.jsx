@@ -1,8 +1,9 @@
-import ResidentView from "@/app/residentView"
-import StatefulContainer from "@/app/statefulContainer"
-import State from "@/app/state"
-import TimeSlotForm from "@/app/timeSlotForm"
-import '../src/app/styles/admin.css'
+import ResidentView from "@/app/adminView/residentView"
+import StatefulContainer from "@/app/statefulContainer/statefulContainer"
+import State from "@/app/statefulContainer/state"
+import TimeSlotForm from "@/app/adminView/timeSlotForm"
+import ServiceRequirementForm from "@/app/serviceReqForm"
+import '@/app/styles/admin.css'
 
 export default function AdminInterface(){
 
@@ -17,7 +18,7 @@ export default function AdminInterface(){
                         <State title="Add Resident">
                             <ResidentView type="Add"/>
                         </State>
-                        <State title="Edit Resdient">
+                        <State title="Edit Resident">
                             <ResidentView type="Edit"/>
                         </State>
                         <State title="Remove Resident">
@@ -27,6 +28,9 @@ export default function AdminInterface(){
                 </State>
                 <State title="Timeslots">
                     <TimeSlotForm />
+                </State>
+                <State title="Service Requirements">
+                    <ServiceRequirementForm />
                 </State>
                 <State title="Feedbacks">
                     <StatefulContainer>

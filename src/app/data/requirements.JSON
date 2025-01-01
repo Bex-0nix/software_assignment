@@ -1,0 +1,20 @@
+[
+    {
+        "service": "certificateIssue",
+        "requirements": [
+            "Applicants photograph",
+            "Parent Documentation",
+            "bla bla bla"
+        ]
+    },
+    {
+        "service": "idIssue",
+        "requirements": [
+            "Applicants photograph",
+            "Parent Documentation",
+            "bla bla bla",
+            "bla bla bla",
+            "bla bla blaa"
+        ]
+    }
+]

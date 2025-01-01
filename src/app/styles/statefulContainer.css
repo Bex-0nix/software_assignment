@@ -44,7 +44,7 @@
     background-color: transparent;
 }
 .link:hover{
-    background-color: magenta;
+    background-color: purple;
 }
 .main_links>.link{
     height: 10%;
@@ -57,9 +57,15 @@
     border: white 1px solid;
     background-color: transparent;
 }
+.main_links>.link.active{
+    background-color: darkblue;
+}
 .main_links>.link:hover{
-    background-color: magenta;
-    color: black;
+    background-color: darkblue;
+    color: white;
+}
+.active{
+    background-color: purple;
 }
 .main_content{
     position: static;

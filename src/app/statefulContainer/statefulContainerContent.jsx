@@ -36,7 +36,7 @@ export default function StatefulContainerContent({children}){
                     let title = state.props.title;
                     let content = state.props.children;
                     contents[title || (index + 1).toString()] = {'content': content, 'index': index};
-                    return <button className={!activeButton && index == 0 ? "link active" : "link"} key={index} onClick={(e) => {setContent(content, colors[index % length]); setActiveButton(e.target)}}>{title ? title : index + 1}</button>
+                    return <button className={!activeButton && index == 0 ? "link active" : "link"} key={index} onClick={(e) => {setContent(content, index); setActiveButton(e.target)}}>{title ? title : index + 1}</button>; 
                 })}
             </>
     )

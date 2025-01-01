@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 // import timeSlots from "./timeslots.JSON"
-import Alert from "./alert";
+import Alert from "../alert/alert";
 
 let timeSlot = {};
 
@@ -12,18 +12,19 @@ export default function TimeSlotForm(){
     const [excludedIndeces, setExcludedIndeces] = useState([]);
 
     const data = [
-        "service", 
-        "start", 
-        "end", 
-        "interval"
+        ["service", "Service: ", "select"], 
+        ["start", "Start Time: ", "time"], 
+        ["end", "End Time: ", "time"], 
+        ["interval", "Interval: ", "number"],
+        ["limit", "Daily Appointment Limit: ", "number"]
     ];
     function cacheData(){
         for (let d of data){
-            if (inputState[d] === ""){
+            if (inputState[d[0]] === ""){
                 setAlertContent(<Alert title="Form Error" message="Invalid Input" setAlertContent={setAlertContent}/>); 
                 return false;
             } 
-            timeSlot[d] = inputState[d];
+            timeSlot[d[0]] = inputState[d[0]];
         } 
         return true;
     }
@@ -31,7 +32,7 @@ export default function TimeSlotForm(){
 
     function saveData(){
         for (let d of data){
-            if (inputState[d] != timeSlot[d]){
+            if (inputState[d[0]] != timeSlot[d[0]]){
                 setAlertContent(<Alert title="Form Error" message="Input Mismatch" setAlertContent={setAlertContent}/>); 
                 return false;   
             }
@@ -45,6 +46,10 @@ export default function TimeSlotForm(){
         }
         timeSlot["timeSlots"] = tempIntervals;
         timeSlot["lastUpdate"] = new Date().toISOString();
+        timeSlot["slots"] = [{
+            date: "",
+            dailySlots: ""
+        }];
 
         return true;
     }
@@ -122,15 +127,12 @@ export default function TimeSlotForm(){
                     ))}
                 </select>
                 <br />
-                <label>Start Time: </label>
-                <input required type="time" name="start" value={inputState.start} onChange={(e) => {setInputState({...inputState, start : e.target.value})}} />
-                <br />
-                <label>End Time: </label>
-                <input required type="time" name="end" value={inputState.end} onChange={(e) => {setInputState({...inputState, end : e.target.value})}} />
-                <br />
-                <label>Interval: </label>
-                <input required type="number" name="interval" placeholder="minutes" value={inputState.interval} onChange={(e) => {setInputState({...inputState, interval : e.target.value})}} />
-                <br />
+                {data.map((d, index) => index != 0 && (
+                    (<span key={index}><label>{d[1]}</label>
+                    <input required type={d[2]} name="start" value={inputState[d[0]]} onChange={(e) => {setInputState({...inputState, [d[0]] : e.target.value})}} />
+                    <br /></span>)
+                ))
+                }
                 <button onClick={(e) => {cacheData() ? updateIntervals(calculateTimeslots(inputState.start, inputState.end, inputState.interval)) : null; e.preventDefault()}}>Generate slots</button>
                 <br />
                 <br />

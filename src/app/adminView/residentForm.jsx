@@ -1,5 +1,6 @@
-import { useState } from "react"
-import Alert from "./alert";
+import { useEffect, useState } from "react"
+import { useStatefulContainer } from "@/app/statefulContainer/statefulContainerContext" 
+import Alert from "../alert/alert";
 
 const resident = {};
 const data = [
@@ -23,28 +24,12 @@ const data = [
 ]
 
 export default function ResidentForm({type, residents, handleSubmit}){
-    const [fetchedResident, setFetchedResident] = useState({
-        fullName: "",
-        dateOfBirth: "",
-        gender: "",
-        maritalStatus: "",
-        nationality: "",
-        address: "",
-        phoneNumber: "",
-        emailAddress: "",
-        motherName: "",
-        fatherName: "",
-        spouseName: "",
-        numberOfDependents: "",
-        emergencyContactName: "",
-        emergencyContactRelationship: "",
-        emergencyContactPhoneNumber: "",
-        disabilityStatus: "",
-        dateOfRegistration: ""
-    });
+    const {contents} = useStatefulContainer();
+    
+    const [fetchedResident, setFetchedResident] = useState(contents["data"] ? residents[residents.findIndex(resident => resident["id"] == contents["data"])] : {});
     
     const [inputState, setInputState] = useState({
-        id: "",
+        id: contents["data"] || "",
         fullName: "",
         dateOfBirth: "",
         gender: "",
@@ -64,23 +49,50 @@ export default function ResidentForm({type, residents, handleSubmit}){
         dateOfRegistration: ""
     })
     
+    useEffect(() => {
+        return () => {
+            setFetchedResident({});
+            setInputState({
+                id: "",
+                fullName: "",
+                dateOfBirth: "",
+                gender: "",
+                maritalStatus: "",
+                nationality: "",
+                address: "",
+                phoneNumber: "",
+                emailAddress: "",
+                motherName: "",
+                fatherName: "",
+                spouseName: "",
+                numberOfDependents: "",
+                emergencyContactName: "",
+                emergencyContactRelationship: "",
+                emergencyContactPhoneNumber: "",
+                disabilityStatus: "",
+                dateOfRegistration: ""
+            })
+            contents["data"] = null;
+        }
+    }, [type])
+
     const [alertContent, setAlertContent] = useState(null);
 
     function saveData() {
         for (let resident of residents){
-            if (resident["id"] == inputState["id"]) {
+            if (resident["id"] == inputState["id"] && type == "Add") {
                 setAlertContent(<><Alert title="Form Alert" message="Duplicate ID" setAlertContent={setAlertContent}/></>);
                 return false;
             }
         }
         data.unshift("id");
         for (let d of data) {
-            if (inputState[d[0]] == "") {
+            if ((inputState[d[0]] == "" && type == "Add") || (d[0] != "id" && fetchedResident[d[0]] == "" && type == "Edit")) {
                 data.shift()
                 setAlertContent(<><Alert title="Form Alert" message="Missing Input" setAlertContent={setAlertContent}/></>);
                 return false;
             }
-            resident[d[0]] = inputState[d[0]];  
+            type == "Add" ? resident[d[0]] = inputState[d[0]] : resident[d[0]] = fetchedResident[d[0]];  
         }
         data.shift()
         return true;
@@ -101,7 +113,25 @@ export default function ResidentForm({type, residents, handleSubmit}){
                         (
                         <>
                             <button onClick={(e) => {
-                                setFetchedResident(residents[residents.findIndex(resident => resident["id"] == inputState.id)])
+                                setFetchedResident(residents[residents.findIndex(resident => resident["id"] == inputState.id)] || {
+                                    fullName: "",
+                                    dateOfBirth: "",
+                                    gender: "",
+                                    maritalStatus: "",
+                                    nationality: "",
+                                    address: "",
+                                    phoneNumber: "",
+                                    emailAddress: "",
+                                    motherName: "",
+                                    fatherName: "",
+                                    spouseName: "",
+                                    numberOfDependents: "",
+                                    emergencyContactName: "",
+                                    emergencyContactRelationship: "",
+                                    emergencyContactPhoneNumber: "",
+                                    disabilityStatus: "",
+                                    dateOfRegistration: ""
+                                })
                                 if (inputState.id == "") setAlertContent(<Alert title="Form Error" message="Invalid ID" setAlertContent={setAlertContent}/>) 
                                 e.preventDefault()
                             }}>Search</button>

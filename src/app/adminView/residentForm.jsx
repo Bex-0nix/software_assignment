@@ -4,23 +4,23 @@ import Alert from "../alert/alert";
 
 const resident = {};
 const data = [
-    ["fullName" , "Full Name"],
-    ["dateOfBirth" , "Birth Date"],
-    ["gender" , "Gender"],
-    ["maritalStatus" , "Marital Status"],
-    ["nationality" , "Nationality"],
-    ["address" , "Address"],
-    ["phoneNumber" , "Phone Number"],
-    ["emailAddress" , "Email"],
-    ["motherName" , "Mother's Name"],
-    ["fatherName" , "Father's Name"],
-    ["spouseName" , "Spouse's Name"],
-    ["numberOfDependents" , "Number Of Dependents"],
-    ["emergencyContactName" , "Emergency Contact"],
-    ["emergencyContactRelationship" , "Emergency Contact Relationship"],
-    ["emergencyContactPhoneNumber" , "Emergency Contact Number"],
-    ["disabilityStatus" , "Disability Status"],
-    ["dateOfRegistration" , "Registration Date"]
+    ["fullName" , "Full Name", "text"],
+    ["dateOfBirth" , "Birth Date", "date"],
+    ["gender" , "Gender", "text"],
+    ["maritalStatus" , "Marital Status", "text"],
+    ["nationality" , "Nationality", "text"],
+    ["address" , "Address", "text"],
+    ["phoneNumber" , "Phone Number", "text"],
+    ["emailAddress" , "Email", "email"],
+    ["motherName" , "Mother's Name", "text"],
+    ["fatherName" , "Father's Name", "text"],
+    ["spouseName" , "Spouse's Name", "text"],
+    ["numberOfDependents" , "Number Of Dependents", "text"],
+    ["emergencyContactName" , "Emergency Contact", "text"],
+    ["emergencyContactRelationship" , "Emergency Contact Relationship", "text"],
+    ["emergencyContactPhoneNumber" , "Emergency Contact Number", "text"],
+    ["disabilityStatus" , "Disability Status", "text"],
+    ["dateOfRegistration" , "Registration Date", "date"]
 ]
 
 export default function ResidentForm({type, residents, handleSubmit}){
@@ -161,7 +161,7 @@ function MoreData({disabled, editable, fetchedResident, setFetchedResident, inpu
             {data.map((d, index) => (        
                 <div key={index}>        
                     <label htmlFor="">{d[1]}: </label>
-                    <input required disabled={disabled && !editable} type="text" name={d[0]} value={(!editable && !disabled ? inputState[d[0]] : fetchedResident?.[d[0]]?? "")} onChange={(e) => {!editable && !disabled ? setInputState({...inputState, [d[0]] : e.target.value}) : setFetchedResident({...fetchedResident, [d[0]] : e.target.value})}}/>
+                    <input required disabled={disabled && !editable} type={d[2]} name={d[0]} value={(!editable && !disabled ? inputState[d[0]] : fetchedResident?.[d[0]]?? "")} onChange={(e) => {!editable && !disabled ? setInputState({...inputState, [d[0]] : e.target.value}) : setFetchedResident({...fetchedResident, [d[0]] : e.target.value})}}/>
                     <br />
                 </div>
             ))}

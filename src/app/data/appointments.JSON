@@ -1,9 +1,9 @@
 [
     {
-        "appointmentId": "",
-        "residentId": "",
-        "service": "",
-        "date": "",
-        "timeSlot": ""
+        "appointmentId": "25",
+        "residentId": "3",
+        "service": "certificateIssue",
+        "date": "2010-11-15",
+        "timeSlot":  "03:10 AM - 03:29 AM"
     }
 ]

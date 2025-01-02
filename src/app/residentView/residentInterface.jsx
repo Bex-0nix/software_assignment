@@ -1,6 +1,7 @@
 import StatefulContainer from "../statefulContainer/statefulContainer"
 import State from "../statefulContainer/state"
 import AppointmentForm from "./appointmentForm"
+import FeedbackForm from "./feedback";
 
 export default function ResidentInterface(){
 
@@ -25,8 +26,8 @@ export default function ResidentInterface(){
                         <State title="Make Appointment">
                             <AppointmentForm type="Make"/>
                         </State>
-                        <State title="Edit Appointment">
-                            <AppointmentForm type="Edit"/>
+                        <State title="Reschedule Appointment">
+                            <AppointmentForm type="Reschedule"/>
                         </State>
                         <State title="Cancel Appointment">
                             <AppointmentForm type="Cancel"/>
@@ -34,7 +35,7 @@ export default function ResidentInterface(){
                     </StatefulContainer>
                 </State>
                 <State title="Feedback">
-                
+                    <FeedbackForm />
                 </State>
             </StatefulContainer>
         </>

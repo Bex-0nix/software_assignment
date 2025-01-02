@@ -12,7 +12,7 @@ export default function AdminInterface(){
             <StatefulContainer isMain={true}>
                 <State title="Residents">
                     <StatefulContainer>
-                        <State title="List Resident">
+                        <State title="List Residents">
                             <ResidentView type="List"/>
                         </State>
                         <State title="Add Resident">

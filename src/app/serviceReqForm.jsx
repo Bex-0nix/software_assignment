@@ -7,25 +7,37 @@ export default function ServiceRequirementForm(){
     const [service, setService] = useState(services[0]);
     const [reqs, setReqs] = useState((requirements[requirements.findIndex(requirement => requirement.service == service)]["requirements"]));
     const [inputState, setInputState] = useState({});
+
     
+
     useEffect(() => {
         setReqs((requirements[requirements.findIndex(requirement => requirement.service == service)]["requirements"]));
-        return () => setInputState({})
     }, [service])
+    
+    useEffect(() => {
+        return () => {
+            reqs.forEach((req, index) => {
+                setInputState({})
+                setInputState(inputState => ({...inputState, [index]: req}))
+            })
+        }
+    }, [reqs])
+    
     return (
         <div>
             <form action="">
-                <select name="services" onChange={(e) => {setService(e.target.value)}}>
+                <select name="services" value={service} onChange={(e) => {setService(e.target.value)}}>
                     {services.map((service, index) => (
-                        <option key={index}>{service}</option>
+                        <option key={index} value={service}>{service}</option>
                     ))}
                 </select>
                 <label>Requirements</label>
-                <button onClick={(e) => {e.preventDefault(); setReqs(reqs => ([...reqs, (<input type="text"/>)]))}}>Add</button>
+                <button onClick={(e) => {e.preventDefault(); setReqs(reqs => ([...reqs, ""]))}}>Add</button>
+                <br />
                 {reqs.map((req, index) =>(
                     <>
                         <br />
-                        <input key={index} type="text" value={req} onChange={(e) => {e.target.value = inputState.index }}/>
+                        <input key={index} type="text" value={inputState[index] || req} onChange={(e) => {setInputState(inputState => ({...inputState, [index]: e.target.value}))}}/>
                         <br />
                     </>
                 ))}

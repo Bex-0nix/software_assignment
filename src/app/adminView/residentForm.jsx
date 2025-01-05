@@ -105,37 +105,43 @@ export default function ResidentForm({type, residents, handleSubmit}){
                 <h1>{type} Resident</h1>
                 <br />
                 <form action="">
-                    <label htmlFor="">ID: </label>
-                    <input required type="text" name="id" value={inputState.id} onChange={(e) => {setInputState({...inputState, id: e.target.value})}}/>
-                    <br />
+                    <div className="form_item">
+                        <label htmlFor="">ID:</label>
+                        <input required type="text" name="id" value={inputState.id} onChange={(e) => {setInputState({...inputState, id: e.target.value})}}/>
+                        {type != "Add" ? (
+                            <>
+                                <button onClick={(e) => {
+                                    setFetchedResident(residents[residents.findIndex(resident => resident["id"] == inputState.id)] || {
+                                        fullName: "",
+                                        dateOfBirth: "",
+                                        gender: "",
+                                        maritalStatus: "",
+                                        nationality: "",
+                                        address: "",
+                                        phoneNumber: "",
+                                        emailAddress: "",
+                                        motherName: "",
+                                        fatherName: "",
+                                        spouseName: "",
+                                        numberOfDependents: "",
+                                        emergencyContactName: "",
+                                        emergencyContactRelationship: "",
+                                        emergencyContactPhoneNumber: "",
+                                        disabilityStatus: "",
+                                        dateOfRegistration: ""
+                                    })
+                                    if (inputState.id == "") setAlertContent(<Alert title="Form Error" message="Invalid ID" setAlertContent={setAlertContent}/>) 
+                                    e.preventDefault()
+                                 }}>Search</button>
+                            </>
+                        )
+                        :
+                        null}
+                    </div>
                     
                     { type == "Remove" || type == "Edit" ? 
                         (
                         <>
-                            <button onClick={(e) => {
-                                setFetchedResident(residents[residents.findIndex(resident => resident["id"] == inputState.id)] || {
-                                    fullName: "",
-                                    dateOfBirth: "",
-                                    gender: "",
-                                    maritalStatus: "",
-                                    nationality: "",
-                                    address: "",
-                                    phoneNumber: "",
-                                    emailAddress: "",
-                                    motherName: "",
-                                    fatherName: "",
-                                    spouseName: "",
-                                    numberOfDependents: "",
-                                    emergencyContactName: "",
-                                    emergencyContactRelationship: "",
-                                    emergencyContactPhoneNumber: "",
-                                    disabilityStatus: "",
-                                    dateOfRegistration: ""
-                                })
-                                if (inputState.id == "") setAlertContent(<Alert title="Form Error" message="Invalid ID" setAlertContent={setAlertContent}/>) 
-                                e.preventDefault()
-                            }}>Search</button>
-                            <br />           
                             <MoreData disabled={type == "Remove" ? true : false} editable={type == "Edit" ? true : false} fetchedResident={fetchedResident} setFetchedResident={setFetchedResident} inputState={inputState} setInputState={setInputState}/>   
                         </>
                         )  
@@ -143,11 +149,11 @@ export default function ResidentForm({type, residents, handleSubmit}){
                         (
                             <>
                             <MoreData disabled={false} editable={false} inputState={inputState} setInputState={setInputState}/>
-                            <br />           
                         </>
                     )}
-
-                    <input type="submit" value="submit" onClick={(e) => {saveData() ? handleSubmit(e, type, resident) :  e.preventDefault();}}/>
+                    <div className="form_item submit">
+                        <input type="submit" value="submit" onClick={(e) => {saveData() ? handleSubmit(e, type, resident) :  e.preventDefault();}}/>
+                    </div>
                 </form>
             </div>
         </>
@@ -159,7 +165,7 @@ function MoreData({disabled, editable, fetchedResident, setFetchedResident, inpu
     return(
         <>
             {data.map((d, index) => (        
-                <div key={index}>        
+                <div key={index} className="form_item">        
                     <label htmlFor="">{d[1]}: </label>
                     <input required disabled={disabled && !editable} type={d[2]} name={d[0]} value={(!editable && !disabled ? inputState[d[0]] : fetchedResident?.[d[0]]?? "")} onChange={(e) => {!editable && !disabled ? setInputState({...inputState, [d[0]] : e.target.value}) : setFetchedResident({...fetchedResident, [d[0]] : e.target.value})}}/>
                     <br />

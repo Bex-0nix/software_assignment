@@ -1,103 +1,244 @@
+:root{
+    --primary-color: blue;
+}
+
+* {
+    box-sizing: border-box;
+}
 .stateful_container{
-    width: 100%;
-    height: 100%;
-    border: 1px solid black;
+    position: relative;
 }
 .main_stateful_container{
+    padding-top: 10vh;
     height: 100vh;
     width: 100vw;
-    background-image: url(../images/appointment-bg.jpg);
+    /* background-image: url("../images/appointment-bg.jpg"); */
+    background-color: black;
     background-size: cover;
 }
 .links{
-    height: 15%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     width: 100%;
+    height: 70px;
     display: flex;
-    justify-content: end;
-    align-items: center;
-    overflow: hidden;
-    /* background-color: rgba(24, 9, 51, 0.603); */
+    z-index: 1;
+    align-items: end;
+    overflow-x: scroll;
+    border-bottom: 1px white solid;
 }
 .main_links{
+    position: static;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
     position: fixed;
-    top: 2.5vh;
-    right: 0.5vw;
-    height: 95vh;
-    width: 12.5vw;
-    flex-direction: column;
-    justify-content: start;
-    background-color: rgba(0, 0, 0, 0.459);
-    gap: 20px;
-    border: 2px solid white;
-    border-radius: 20px;
-    overflow-y: scroll;
+    width: 100vw;
+    height: 10vh;
+    top: 0;
+    left: 0;
+    border: none;
+    background-color: rgba(106, 45, 124, 0.959);
+    overflow-y: hidden;
+    overflow-x: scroll;
 }
 .link{
-    margin-right: 20px;
-    outline: none;
-    height: 50%;
-    width: 100px;
-    font-size: auto;
-    /* font-family: "Playwrite AU VIC Guides", serif; */
-    border: 1px black solid;
+    bottom: 0;
+    font-size: 20px;
+    min-width: 100px;
+    max-width: 25%;
+    width: auto;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.993);
+    border-radius: 0px;
+}
+.link.active{
+    height: 40px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background-color: black;
     color: white;
-    background-color: transparent;
+    
 }
 .link:hover{
-    background-color: purple;
+    background-color: black;
+    color: white;
 }
 .main_links>.link{
-    height: 10%;
-    width: 70%;    
-    gap: 100px;
-    z-index: 1;
-    margin: 0;
-    margin-top: 20px;
-    border-radius: 20px;
-    border: white 1px solid;
-    background-color: transparent;
+    position: static;
+    height: 40px;
+    width: 15%;
+    background-color: white;
+    
 }
 .main_links>.link.active{
-    background-color: darkblue;
+    background-color: black;
+    color: white;
+    height: 55px;
+    border-radius: 0px;
 }
 .main_links>.link:hover{
-    background-color: darkblue;
+    background-color: black;
     color: white;
-}
-.active{
-    background-color: purple;
+
 }
 .main_content{
-    position: static;
-    width: 100%;
-    height: 85%;
-    background-color: rgba(0, 0, 0, 0.459);
-    color: white;
+    width: 100vw;
+    height: 90vh;
+    border: 1px solid white;
+    background-color:white;
 }
 .main_main_content{
-    position: absolute;
-    width: 82.5vw;
-    height: 90vh;
-    top: 5vh;
-    left: 2vw;
-    border: 2px rgb(0, 0, 0) solid;
-    border-radius: 25px;
-    background-color: rgba(0, 0, 0, 0.459);
-    z-index: 0;
-    backdrop-filter: blur(20px);
+
 }
 .alert{
+    position: absolute;
+    width: 300px;
+    height: 150px;
+    top: calc(50% - 75px);
+    left: calc(50% - 150px);
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: rgba(91, 14, 163, 0.932);
+    text-align: center;
+}
+.alert .alert_title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25%;
+    background-color: rgba(0, 0, 0, 0.849);
+    border-bottom: 1px solid black;
+    pointer-events: none;
+}
+.alert .alert_message{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75%;
+    pointer-events: none;
+    font-size: 25px;
+}
+.alert::before{
+    content: '';
+    top: 0;
+    left: 0;
     position: fixed;
-    height: 100px;
-    width: 200px;
-    top: calc(50% - 50px);
-    left: calc(50% - 100px);
-    background-color: black;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.3);
+    z-index: -1;
+    pointer-events: none;
 }
 ::-webkit-scrollbar{
     width: 0px;
+    height: 0px;
 }
-::-webkit-scrollbar-thumb{
-    width: 5px;
-    background-color: black;
+.form{
+    text-align: center;
+    margin: 2.5%;
+    padding: 1%;
+    height: 90%;
+    width: 95;
+    background-color: rgba(91, 14, 163, 0.062);
+    overflow-y: scroll;
+}
+.form h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(53, 3, 53, 0.527);
+    margin-bottom: 25px;
+    height: 60px;
+    border-radius: 10px;
+}
+.form_item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    max-width: 90%;
+    height: auto;
+    min-height: 200px;
+    max-height: 300px;
+    background-color: rgba(106, 45, 124, 0.479);
+    border-radius: 10px;
+    overflow: scroll;
+    gap: 10px;
+}
+.form_item textarea{
+    width: 70%;
+    height: 50%;
+    padding: 5px;
+}
+.form_item.submit{
+    background-color: transparent;
+}
+form{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    row-gap: 20px;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 30px;
+}
+form input,select,button,textarea{
+    min-width: 100px;
+    max-width: auto;
+    height: 35px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+}
+ul{
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 10px;
+    overflow: scroll;
+}
+ul.input{
+    justify-content: start;
+}
+ul input{
+    min-width: 100px;
+    width: auto;
+    max-width: auto;
+    min-height: 35px;
+}
+ul span{
+    display: flex;
+}
+.list{
+    margin: 2.5%;
+    padding: 1%;
+    height: 90%;
+    width: 95;
+    background-color: rgba(91, 14, 163, 0.062);
+}
+.list h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(53, 3, 53, 0.527);
+    margin-bottom: 25px;
+    height: 60px;
+    border-radius: 10px;
+}
+.list_item{
+    position: relative;
+    background-color: rgba(128, 128, 128, 0.5);
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+    height: auto;
+    max-height: 300px;
+    width: 100%;
+    overflow: scroll;
+}
+.list_item_piece{
+    display: flex;
 }

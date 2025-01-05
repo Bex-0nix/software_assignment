@@ -1,291 +1,856 @@
 {
-    "residents" : [
+  "residents": [
+    {
+      "id": "12345",
+      "fullName": "abebe beso bela",
+      "dateOfBirth": "2001-5-20",
+      "gender": "Male",
+      "maritalStatus": "Single",
+      "nationality": "Ethiopian",
+      "address": "asdfsfsafsdafsa",
+      "phoneNumber": "fsdafasdf",
+      "emailAddress": "sadfasdf",
+      "motherName": "sdafsadf",
+      "fatherName": "dsafasdf",
+      "spouseName": "dsafasdf",
+      "numberOfDependents": "sadfsadf",
+      "emergencyContactName": "sdafasf",
+      "emergencyContactRelationship": "sadfsadf",
+      "emergencyContactPhoneNumber": "sdafasfd",
+      "disabilityStatus": "sadfsadf",
+      "dateOfRegistration": "sdafsadfsdaf"
+    },
+    {
+      "id": "12346",
+      "fullName": "bilito koretatmo bela",
+      "dateOfBirth": "2050-11-27",
+      "gender": "Male",
+      "maritalStatus": "Single",
+      "nationality": "Ethiopian",
+      "address": "asdfsfsafsdafsa",
+      "phoneNumber": "fsdafasdf",
+      "emailAddress": "sadfasdf",
+      "motherName": "sdafsadf",
+      "fatherName": "dsafasdf",
+      "spouseName": "dsafasdf",
+      "numberOfDependents": "sadfsadf",
+      "emergencyContactName": "sdafasf",
+      "emergencyContactRelationship": "sadfsadf",
+      "emergencyContactPhoneNumber": "sdafasfd",
+      "disabilityStatus": "sadfsadf",
+      "dateOfRegistration": "sdafsadfsdaf"
+    }
+  ],
+  "appointments": [
+    {
+      "appointmentId": "",
+      "residentId": "",
+      "service": "",
+      "date": "",
+      "timeSlot": "",
+      "status": "",
+      "id": "7061"
+    },
+    {
+      "id": "12345-certificateIssue",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-01-24",
+      "timeSlot": "09:10 AM - 09:29 AM"
+    },
+    {
+      "id": "asdfasasdfasdfas/certificateIssue",
+      "residentId": "asdfasasdfasdfas",
+      "service": "certificateIssue",
+      "date": "2025-01-08",
+      "timeSlot": "08:10 AM - 08:29 AM"
+    },
+    {
+      "id": "trevor/certificateIssue",
+      "residentId": "trevor",
+      "service": "certificateIssue",
+      "date": "2025-01-13",
+      "timeSlot": "09:10 AM - 09:29 AM"
+    },
+    {
+      "id": "cnull",
+      "residentId": "asdfasasdfasdfas",
+      "service": "certificateIssue",
+      "date": "2025-06-15",
+      "timeSlot": "08:10 AM - 08:29 AM"
+    },
+    {
+      "id": "c4321412342312025011504100429",
+      "residentId": "432141234231",
+      "service": "certificateIssue",
+      "date": "2025-01-15",
+      "timeSlot": "04:10 AM - 04:29 AM"
+    },
+    {
+      "id": "c4321412342312025013105500609",
+      "residentId": "432141234231",
+      "service": "certificateIssue",
+      "date": "2025-01-31",
+      "timeSlot": "05:50 AM - 06:09 AM"
+    },
+    {
+      "id": "c4321412342312026062505500609",
+      "residentId": "432141234231",
+      "service": "certificateIssue",
+      "date": "2026-06-25",
+      "timeSlot": "05:50 AM - 06:09 AM"
+    },
+    {
+      "id": "c4321412342312026062605500609",
+      "residentId": "432141234231",
+      "service": "certificateIssue",
+      "date": "2026-06-26",
+      "timeSlot": "05:50 AM - 06:09 AM"
+    },
+    {
+      "id": "c4321412342312026063005500609",
+      "residentId": "432141234231",
+      "service": "certificateIssue",
+      "date": "2026-06-30",
+      "timeSlot": "05:50 AM - 06:09 AM"
+    },
+    {
+      "id": "c4321412342312026063005500609",
+      "residentId": "432141234231",
+      "service": "certificateIssue",
+      "date": "2026-06-30",
+      "timeSlot": "05:50 AM - 06:09 AM"
+    },
+    {
+      "id": "c4321412342312026070205500609",
+      "residentId": "432141234231",
+      "service": "certificateIssue",
+      "date": "2026-07-02",
+      "timeSlot": "05:50 AM - 06:09 AM"
+    },
+    {
+      "id": "c4321412342312026072305500609",
+      "residentId": "432141234231",
+      "service": "certificateIssue",
+      "date": "2026-07-23",
+      "timeSlot": "05:50 AM - 06:09 AM"
+    },
+    {
+      "id": "c12345892025012303300349",
+      "residentId": "1234589",
+      "service": "certificateIssue",
+      "date": "2025-01-23",
+      "timeSlot": "03:30 AM - 03:49 AM"
+    },
+    {
+      "id": "c12345892025012303300349",
+      "residentId": "1234589",
+      "service": "certificateIssue",
+      "date": "2025-01-23",
+      "timeSlot": "03:30 AM - 03:49 AM"
+    },
+    {
+      "id": "c12345892025012303300349",
+      "residentId": "1234589",
+      "service": "certificateIssue",
+      "date": "2025-01-23",
+      "timeSlot": "03:30 AM - 03:49 AM"
+    },
+    {
+      "id": "c12345892024123003300349",
+      "residentId": "1234589",
+      "service": "certificateIssue",
+      "date": "2024-12-30",
+      "timeSlot": "03:30 AM - 03:49 AM"
+    },
+    {
+      "id": "c12345892025031203300349",
+      "residentId": "1234589",
+      "service": "certificateIssue",
+      "date": "2025-03-12",
+      "timeSlot": "03:30 AM - 03:49 AM"
+    },
+    {
+      "id": "c123452025031203300349",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-03-12",
+      "timeSlot": "03:30 AM - 03:49 AM"
+    },
+    {
+      "id": "c123452025031203300349",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-03-12",
+      "timeSlot": "03:30 AM - 03:49 AM"
+    },
+    {
+      "id": "c123452025031203300349",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-03-12",
+      "timeSlot": "03:30 AM - 03:49 AM"
+    },
+    {
+      "id": "c123452025031204100429",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-03-12",
+      "timeSlot": "04:10 AM - 04:29 AM"
+    },
+    {
+      "id": "c123452025031204100429",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-03-12",
+      "timeSlot": "04:10 AM - 04:29 AM"
+    },
+    {
+      "id": "c123452025031204100429",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-03-12",
+      "timeSlot": "04:10 AM - 04:29 AM"
+    },
+    {
+      "id": "c123452025031202300249",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-03-12",
+      "timeSlot": "02:30 AM - 02:49 AM"
+    },
+    {
+      "id": "c123452025031202300249",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-03-12",
+      "timeSlot": "02:30 AM - 02:49 AM"
+    },
+    {
+      "id": "c123452025031203100329",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-03-12",
+      "timeSlot": "03:10 AM - 03:29 AM"
+    },
+    {
+      "id": "c123452025031205300549",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-03-12",
+      "timeSlot": "05:30 AM - 05:49 AM"
+    },
+    {
+      "id": "c123462025011708300859",
+      "residentId": "12346",
+      "service": "certificateIssue",
+      "date": "2025-01-17",
+      "timeSlot": "08:30 AM - 08:59 AM"
+    },
+    {
+      "id": "c123462025011708300859",
+      "residentId": "12346",
+      "service": "certificateIssue",
+      "date": "2025-01-17",
+      "timeSlot": "08:30 AM - 08:59 AM"
+    },
+    {
+      "id": "c123462025011705000529",
+      "residentId": "12346",
+      "service": "certificateIssue",
+      "date": "2025-01-17",
+      "timeSlot": "05:00 AM - 05:29 AM"
+    },
+    {
+      "id": "c123462025011809300959",
+      "residentId": "12346",
+      "service": "certificateIssue",
+      "date": "2025-01-18",
+      "timeSlot": "09:30 AM - 09:59 AM"
+    },
+    {
+      "id": "c123452025011008300859",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-01-10",
+      "timeSlot": "08:30 AM - 08:59 AM"
+    },
+    {
+      "id": "c123452025011709300959",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-01-17",
+      "timeSlot": "09:30 AM - 09:59 AM"
+    }
+  ],
+  "requirements": [
+    {
+      "service": "certificateIssue",
+      "requirements": [
+        "Applicants photograph sakdfhaskjdf",
+        "Parent Documentation",
+        "bla bla bla"
+      ],
+      "id": "732e"
+    },
+    {
+      "service": "idIssue",
+      "requirements": [
+        "Applicants photograph",
+        "Parent Documentation",
+        "bla bla bla",
+        "bla bla bla",
+        "bla bla blaa"
+      ],
+      "id": "9956"
+    }
+  ],
+  "timeSlots": [
+    {
+      "service": "certificateIssue",
+      "start": "02:30",
+      "end": "11:30",
+      "interval": "30",
+      "serviceProviderCount": 3,
+      "timeSlots": [
+        [
+          "02:30 AM - 02:59 AM"
+        ],
+        [
+          "03:00 AM - 03:29 AM"
+        ],
+        [
+          "03:30 AM - 03:59 AM"
+        ],
+        [
+          "04:00 AM - 04:29 AM"
+        ],
+        [
+          "04:30 AM - 04:59 AM"
+        ],
+        [
+          "05:00 AM - 05:29 AM"
+        ],
+        [
+          "05:30 AM - 05:59 AM"
+        ],
+        [
+          "06:00 AM - 06:29 AM"
+        ],
+        [
+          "07:30 AM - 07:59 AM"
+        ],
+        [
+          "08:00 AM - 08:29 AM"
+        ],
+        [
+          "08:30 AM - 08:59 AM"
+        ],
+        [
+          "09:00 AM - 09:29 AM"
+        ],
+        [
+          "09:30 AM - 09:59 AM"
+        ],
+        [
+          "10:00 AM - 10:29 AM"
+        ],
+        [
+          "10:30 AM - 10:59 AM"
+        ],
+        [
+          "11:00 AM - 11:29 AM"
+        ]
+      ],
+      "lastUpdate": "2025-01-05T07:46:18.221Z",
+      "slots": [
         {
-            "id" : "12345",
-            "fullName" : "abebe beso bela",
-            "dateOfBirth" : "2001-5-20",
-            "gender" : "Male",
-            "maritalStatus" : "Single",
-            "nationality" : "Ethiopian",
-            "address" : "asdfsfsafsdafsa",
-            "phoneNumber" : "fsdafasdf",
-            "emailAddress" : "sadfasdf",
-            "motherName" : "sdafsadf",
-            "fatherName" : "dsafasdf",
-            "spouseName" : "dsafasdf",
-            "numberOfDependents" : "sadfsadf",
-            "emergencyContactName" : "sdafasf",
-            "emergencyContactRelationship" : "sadfsadf",
-            "emergencyContactPhoneNumber" : "sdafasfd",
-            "disabilityStatus" : "sadfsadf",
-            "dateOfRegistration" : "sdafsadfsdaf"
-        },
-        {
-            "id" : "12346",
-            "fullName" : "bilito koretatmo bela",
-            "dateOfBirth" : "2050-11-27",
-            "gender" : "Male",
-            "maritalStatus" : "Single",
-            "nationality" : "Ethiopian",
-            "address" : "asdfsfsafsdafsa",
-            "phoneNumber" : "fsdafasdf",
-            "emailAddress" : "sadfasdf",
-            "motherName" : "sdafsadf",
-            "fatherName" : "dsafasdf",
-            "spouseName" : "dsafasdf",
-            "numberOfDependents" : "sadfsadf",
-            "emergencyContactName" : "sdafasf",
-            "emergencyContactRelationship" : "sadfsadf",
-            "emergencyContactPhoneNumber" : "sdafasfd",
-            "disabilityStatus" : "sadfsadf",
-            "dateOfRegistration" : "sdafsadfsdaf"
+          "date": "",
+          "dailySlots": ""
         }
-    ],
-
-    "appointments" : [
-        {
-            "appointmentId": "",
-            "residentId": "",
-            "service": "",
-            "date": "",
-            "timeSlot": [
-                {
-                    "slot" : "",
-                    "index": 0
-                }
+      ]
+    },
+    {
+      "service": "idIssue",
+      "start": "02:30",
+      "end": "11:30",
+      "interval": "20",
+      "serviceProviderCount": 4,
+      "timeSlots": [
+        [
+          "02:30 AM - 02:49 AM"
+        ],
+        [
+          "02:50 AM - 03:09 AM"
+        ],
+        [
+          "03:10 AM - 03:29 AM"
+        ],
+        [
+          "03:30 AM - 03:49 AM"
+        ],
+        [
+          "03:50 AM - 04:09 AM"
+        ],
+        [
+          "04:10 AM - 04:29 AM"
+        ],
+        [
+          "04:30 AM - 04:49 AM"
+        ],
+        [
+          "04:50 AM - 05:09 AM"
+        ],
+        [
+          "05:10 AM - 05:29 AM"
+        ],
+        [
+          "05:30 AM - 05:49 AM"
+        ],
+        [
+          "05:50 AM - 06:09 AM"
+        ],
+        [
+          "06:10 AM - 06:29 AM"
+        ],
+        [
+          "07:30 AM - 07:49 AM"
+        ],
+        [
+          "07:50 AM - 08:09 AM"
+        ],
+        [
+          "08:10 AM - 08:29 AM"
+        ],
+        [
+          "08:30 AM - 08:49 AM"
+        ],
+        [
+          "08:50 AM - 09:09 AM"
+        ],
+        [
+          "09:10 AM - 09:29 AM"
+        ],
+        [
+          "09:30 AM - 09:49 AM"
+        ],
+        [
+          "09:50 AM - 10:09 AM"
+        ],
+        [
+          "10:10 AM - 10:29 AM"
+        ],
+        [
+          "10:30 AM - 10:49 AM"
+        ],
+        [
+          "10:50 AM - 11:09 AM"
+        ],
+        [
+          "11:10 AM - 11:29 AM"
+        ]
+      ],
+      "lastUpdate": "2025-01-05T07:50:40.984Z"
+    }
+  ],
+  "schedules": [
+    {
+      "service": "certificateIssue",
+      "date": "2025-01-15",
+      "status": "open",
+      "dailySlots": [
+        [
+          {
+            "appointmentId": ""
+          },
+          {
+            "appointmentId": ""
+          },
+          {
+            "appointmentId": ""
+          }
+        ]
+      ],
+      "id": "4bda"
+    },
+    {
+      "id": "8aaf",
+      "date": "2025-01-10",
+      "service": "certificateIssue",
+      "status": "empty",
+      "updated": false,
+      "dailySlots": [
+        [
+          [
+            "02:30 AM - 02:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ],
+        [
+          [
+            "03:00 AM - 03:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ],
+        [
+          [
+            "03:30 AM - 03:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ],
+        [
+          [
+            "04:00 AM - 04:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ],
+        [
+          [
+            "04:30 AM - 04:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ],
+        [
+          [
+            "05:00 AM - 05:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ],
+        [
+          [
+            "05:30 AM - 05:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ],
+        [
+          [
+            "06:00 AM - 06:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ],
+        [
+          [
+            "07:30 AM - 07:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ],
+        [
+          [
+            "08:00 AM - 08:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ],
+        [
+          [
+            "08:30 AM - 08:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ],
+        [
+          [
+            "09:00 AM - 09:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ],
+        [
+          [
+            "09:30 AM - 09:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ],
+        [
+          [
+            "10:00 AM - 10:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ],
+        [
+          [
+            "10:30 AM - 10:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ],
+        [
+          [
+            "11:00 AM - 11:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": []
+          }
+        ]
+      ]
+    },
+    {
+      "id": "74e5",
+      "date": "2025-01-17",
+      "service": "certificateIssue",
+      "status": "empty",
+      "updated": false,
+      "dailySlots": [
+        [
+          [
+            "02:30 AM - 02:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
             ]
-        }
-    ],
-
-    "requirements" : [
-        {
-            "service": "certificateIssue",
-            "requirements": [
-                "Applicants photograph sakdfhaskjdf",
-                "Parent Documentation",
-                "bla bla bla"
+          }
+        ],
+        [
+          [
+            "03:00 AM - 03:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
             ]
-        },
-        {
-            "service": "idIssue",
-            "requirements": [
-                "Applicants photograph",
-                "Parent Documentation",
-                "bla bla bla",
-                "bla bla bla",
-                "bla bla blaa"
+          }
+        ],
+        [
+          [
+            "03:30 AM - 03:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
             ]
-        }
-    ],
-
-    "timeSlots" : [
-        {
-            "service": "certificateIssue",
-            "start": "02:30",
-            "end": "11:30",
-            "interval": "20",
-            "limit": 1,
-            "timeSlots": [
-                [
-                    "02:30 AM - 02:49 AM",
-                    "included"
-                ],
-                [
-                    "02:50 AM - 03:09 AM",
-                    "included"
-                ],
-                [
-                    "03:10 AM - 03:29 AM",
-                    "included"
-                ],
-                [
-                    "03:30 AM - 03:49 AM",
-                    "included"
-                ],
-                [
-                    "03:50 AM - 04:09 AM",
-                    "included"
-                ],
-                [
-                    "04:10 AM - 04:29 AM",
-                    "included"
-                ],
-                [
-                    "04:30 AM - 04:49 AM",
-                    "included"
-                ],
-                [
-                    "04:50 AM - 05:09 AM",
-                    "included"
-                ],
-                [
-                    "05:10 AM - 05:29 AM",
-                    "included"
-                ],
-                [
-                    "05:30 AM - 05:49 AM",
-                    "included"
-                ],
-                [
-                    "05:50 AM - 06:09 AM",
-                    "included"
-                ],
-                [
-                    "06:10 AM - 06:29 AM",
-                    "included"
-                ],
-                [
-                    "06:30 AM - 06:49 AM",
-                    "excluded"
-                ],
-                [
-                    "06:50 AM - 07:09 AM",
-                    "excluded"
-                ],
-                [
-                    "07:10 AM - 07:29 AM",
-                    "excluded"
-                ],
-                [
-                    "07:30 AM - 07:49 AM",
-                    "excluded"
-                ],
-                [
-                    "07:50 AM - 08:09 AM",
-                    "included"
-                ],
-                [
-                    "08:10 AM - 08:29 AM",
-                    "included"
-                ],
-                [
-                    "08:30 AM - 08:49 AM",
-                    "included"
-                ],
-                [
-                    "08:50 AM - 09:09 AM",
-                    "included"
-                ],
-                [
-                    "09:10 AM - 09:29 AM",
-                    "included"
-                ],
-                [
-                    "09:30 AM - 09:49 AM",
-                    "included"
-                ],
-                [
-                    "09:50 AM - 10:09 AM",
-                    "included"
-                ],
-                [
-                    "10:10 AM - 10:29 AM",
-                    "included"
-                ],
-                [
-                    "10:30 AM - 10:49 AM",
-                    "included"
-                ],
-                [
-                    "10:50 AM - 11:09 AM",
-                    "included"
-                ],
-                [
-                    "11:10 AM - 11:29 AM",
-                    "included"
-                ]
-            ],
-            "lastUpdate": "2024-12-31T18:45:56.824Z",
-            "slots": [
-                {
-                    "date": "",
-                    "dailySlots": ""
-                }
+          }
+        ],
+        [
+          [
+            "04:00 AM - 04:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
             ]
-        },
-        {
-            "service": "idIssue",
-            "start": "03:00",
-            "end": "11:00",
-            "interval": "30",
-            "limit": 1,
-            "timeSlots": [
-                [
-                    "03:00 AM - 03:29 AM",
-                    "included"
-                ],
-                [
-                    "03:30 AM - 03:59 AM",
-                    "included"
-                ],
-                [
-                    "04:00 AM - 04:29 AM",
-                    "included"
-                ],
-                [
-                    "04:30 AM - 04:59 AM",
-                    "included"
-                ],
-                [
-                    "05:00 AM - 05:29 AM",
-                    "included"
-                ],
-                [
-                    "05:30 AM - 05:59 AM",
-                    "included"
-                ],
-                [
-                    "06:00 AM - 06:29 AM",
-                    "included"
-                ],
-                [
-                    "06:30 AM - 06:59 AM",
-                    "excluded"
-                ],
-                [
-                    "07:00 AM - 07:29 AM",
-                    "excluded"
-                ],
-                [
-                    "07:30 AM - 07:59 AM",
-                    "included"
-                ],
-                [
-                    "08:00 AM - 08:29 AM",
-                    "included"
-                ],
-                [
-                    "08:30 AM - 08:59 AM",
-                    "included"
-                ],
-                [
-                    "09:00 AM - 09:29 AM",
-                    "included"
-                ],
-                [
-                    "09:30 AM - 09:59 AM",
-                    "included"
-                ],
-                [
-                    "10:00 AM - 10:29 AM",
-                    "included"
-                ],
-                [
-                    "10:30 AM - 10:59 AM",
-                    "included"
-                ]
-            ],
-            "lastUpdate": "2024-12-31T18:47:45.990Z",
-            "slots": [
-                {
-                    "date": "",
-                    "dailySlots": ""
-                }
+          }
+        ],
+        [
+          [
+            "04:30 AM - 04:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
             ]
-        }
-    ],
-    
-    "feedBacks" : [
-
-    ]
+          }
+        ],
+        [
+          [
+            "05:00 AM - 05:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          [
+            "05:30 AM - 05:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          [
+            "06:00 AM - 06:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          [
+            "07:30 AM - 07:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          [
+            "08:00 AM - 08:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          [
+            "08:30 AM - 08:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          [
+            "09:00 AM - 09:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          [
+            "09:30 AM - 09:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          [
+            "10:00 AM - 10:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          [
+            "10:30 AM - 10:59 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          [
+            "11:00 AM - 11:29 AM"
+          ],
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      ]
+    }
+  ],
+  "feedBacks": [
+    {
+      "feedbackId": "",
+      "residentId": "",
+      "appointmentId": "",
+      "feedback": "",
+      "id": "5c3e"
+    }
+  ]
 }

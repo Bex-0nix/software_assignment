@@ -32,22 +32,26 @@ export default function FeedbackForm(){
     }
 
     return (
-        <>
+        <div className="form feedback_form">
             {alertContent}
+            <h1>Send Feedback</h1>
             <form action="" onSubmit={handleSubmit}>
-                <br />
-                <label>Applicant ID: </label>
-                <input type="text" ref={residentId}/>
-                <br />
-                <label>Appointment ID: </label>
-                <input type="text" ref={appointmentId}/>
-                <br />
-                <label>Feedback: </label>
-                <br />
-                <input type="text" ref={feedback}/>
-                <br />
-                <input type="submit" value="submit" />
+                <div className="form_item">
+                    <label>Applicant ID: </label>
+                    <input type="text" ref={residentId}/>
+                </div>
+                <div className="form_item">
+                    <label>Appointment ID: </label>
+                    <input type="text" ref={appointmentId}/>
+                </div>
+                <div className="form_item large">
+                    <label>Feedback: </label>
+                    <textarea ref={feedback}/>
+                </div>
+                <div className="form_item submit">
+                    <input type="submit" value="submit" />
+                </div>
             </form>
-        </>
+        </div>
     )
 }

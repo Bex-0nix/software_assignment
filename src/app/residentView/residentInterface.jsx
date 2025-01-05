@@ -1,35 +1,25 @@
 import StatefulContainer from "../statefulContainer/statefulContainer"
 import State from "../statefulContainer/state"
 import AppointmentForm from "./appointmentForm"
-import FeedbackForm from "./feedback";
+import FeedbackForm from "./feedbackForm"
+import { useState } from "react"
+
 
 export default function ResidentInterface(){
-
-    function handleSubmit(event, type, appointment){
-        event.preventDefault();
-        if (type == "Make"){
-            
-        }
-        else if (type == "Edit"){
-
-        }
-        else if (type == "Cancel"){
-
-        }
-    }
+    const [alertContent, setAlertContent] = useState(null)
 
     return (
         <>
             <StatefulContainer isMain={true}>
                 <State title="Appointment">
                     <StatefulContainer>
-                        <State title="Make Appointment">
+                        <State title="Make">
                             <AppointmentForm type="Make"/>
                         </State>
-                        <State title="Reschedule Appointment">
+                        <State title="Reschedule">
                             <AppointmentForm type="Reschedule"/>
                         </State>
-                        <State title="Cancel Appointment">
+                        <State title="Cancel">
                             <AppointmentForm type="Cancel"/>
                         </State>
                     </StatefulContainer>

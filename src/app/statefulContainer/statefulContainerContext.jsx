@@ -17,7 +17,7 @@ export default function StatefulContainerContext({children, isMain}){
     useEffect(() => {
         const animation = document.createElement('style');
         animation.id = "changeBg"
-        animation.textContent = `@keyframes changeBg {0%{background-color: rgba(0, 0, 0, 0.459)}30%{background-color: ${animationColor}}100%{background-color: rgba(0, 0, 0, 0.459)}}`;
+        animation.textContent = `@keyframes changeBg {0%{background-color: rgba(255, 255, 255, 0.459)}30%{background-color: ${animationColor}}100%{background-color: rgba(255, 255, 255, 0.459)}}`;
         document.head.appendChild(animation);
     }, [])
 
@@ -25,7 +25,7 @@ export default function StatefulContainerContext({children, isMain}){
         setAnimationColor(color);
         main.current.style.animation = "none";
         main.current.offsetHeight;
-        main.current.style.animation = "changeBg 0.5s linear";
+        main.current.style.animation = "changeBg 0.2s linear";
     }
 
     function updateContent(content, index){
@@ -35,14 +35,18 @@ export default function StatefulContainerContext({children, isMain}){
     }
 
     function updateActiveButton(button){
-        if (activeButton) activeButton.classList.remove('active')
         setActiveButton(button);
     }
     useEffect(() => {
-        try{
+        try{ 
             activeButton.classList.add('active');
         }
-        catch{
+        catch{}
+        return () => {
+            try{ 
+                if (activeButton) activeButton.classList.remove('active')
+            }
+            catch{}
         }
     }, [activeButton])
 

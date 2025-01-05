@@ -2,7 +2,8 @@ import ResidentView from "@/app/adminView/residentView"
 import StatefulContainer from "@/app/statefulContainer/statefulContainer"
 import State from "@/app/statefulContainer/state"
 import TimeSlotForm from "@/app/adminView/timeSlotForm"
-import ServiceRequirementForm from "@/app/serviceReqForm"
+import ServiceRequirementForm from "@/app/adminView/serviceReqForm"
+import FeedbackView from "@/app/adminView/feedbackView"
 import '@/app/styles/admin.css'
 
 export default function AdminInterface(){
@@ -12,16 +13,16 @@ export default function AdminInterface(){
             <StatefulContainer isMain={true}>
                 <State title="Residents">
                     <StatefulContainer>
-                        <State title="List Residents">
+                        <State title="List">
                             <ResidentView type="List"/>
                         </State>
-                        <State title="Add Resident">
+                        <State title="Add">
                             <ResidentView type="Add"/>
                         </State>
-                        <State title="Edit Resident">
+                        <State title="Edit">
                             <ResidentView type="Edit"/>
                         </State>
-                        <State title="Remove Resident">
+                        <State title="Remove">
                             <ResidentView type="Remove"/>
                         </State>
                     </StatefulContainer>
@@ -33,14 +34,7 @@ export default function AdminInterface(){
                     <ServiceRequirementForm />
                 </State>
                 <State title="Feedbacks">
-                    <StatefulContainer>
-                        <State title="new">
-                            new
-                        </State>
-                        <State title="old">
-                            old
-                        </State>
-                    </StatefulContainer>
+                    <FeedbackView />
                 </State>
             </StatefulContainer>
         </>

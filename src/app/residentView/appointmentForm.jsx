@@ -14,42 +14,16 @@ export default function AppointmentForm({type}){
     const [service, setService] = useState(services[0]);
     const [reqs, setReqs] = useState([]);
 
-    useEffect(() => {
-        load()
-    }, [])
-
-
-    async function load(){
-        const timeSlotResponse = await fetch("http://localhost:8002/timeSlots", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }})
-        const requirementResponse = await fetch("http://localhost:8002/requirements", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }})
-        const appointmentResponse = await fetch("/api/appointment", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }})
-        if (appointmentResponse.ok && requirementResponse.ok && timeSlotResponse){
-            let appointmentData = await appointmentResponse.json()
-            let requirementData = await requirementResponse.json()
-            let timeSlotData = await timeSlotResponse.json()
-            setAppointments(appointmentData)
-            setRequirements(requirementData)
-            setTimeSlots(timeSlotData[timeSlotData.findIndex(elem => elem["service"] == service)])
-            console.log(service)
-            console.log(timeSlotData[timeSlotData.findIndex(elem => elem["service"] == service)])
-            setLoading(false)
-        }
-        else{
-            console.log("failed")
+    function getCurrentDate() {
+        const currentDate = new Date().toJSON();
+        return {
+            date : currentDate.substring(0, 10),
+            year : parseInt(currentDate.substring(0, 4)),
+            month : parseInt(currentDate.substring(5, 7)),
+            day : parseInt(currentDate.substring(8, 10)),
         }
     }
+
     useEffect(() => {
         if (requirements.length > 0) {
             const selectedReq = requirements.find((req) => req.service === service);
@@ -59,10 +33,11 @@ export default function AppointmentForm({type}){
         }    
     }, [service, requirements])
     
+    
     const [inputState, setInputState] = useState({
         residentId : "",
         service : service,
-        date : "",
+        date : getCurrentDate().date,
         timeSlot : "",
     })
     
@@ -75,11 +50,50 @@ export default function AppointmentForm({type}){
     })
     
     useEffect(() => {
+
+        async function load(){
+            const timeSlotResponse = await fetch("http://localhost:8002/timeSlots", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }})
+            const requirementResponse = await fetch("http://localhost:8002/requirements", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }})
+            const appointmentResponse = await fetch(`/api/appointment?service=${encodeURIComponent(service)}&date=${encodeURIComponent(inputState.date)}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            if (appointmentResponse.ok && requirementResponse.ok && timeSlotResponse){
+                let appointmentData = await appointmentResponse.json()
+                let requirementData = await requirementResponse.json()
+                let timeSlotData = await timeSlotResponse.json()
+                console.log()
+                setAppointments(appointmentData.data)
+                setRequirements(requirementData)
+                setTimeSlots(appointmentData.extra.dailySlots)
+                setInputState(prev => ({...prev, timeSlot: appointmentData.extra.dailySlots[0]}))
+                console.log(appointmentData.extra.dailySlots)
+                setLoading(false)
+            }
+            else{
+                console.log("failed")
+            }
+        }
+
+        load()
+    }, [service, inputState.date])
+
+    useEffect(() => {
         setInputState({
             residentId : "",
             service : service,
-            date : "",
-            timeSlot : "",
+            date : getCurrentDate().date,
+            timeSlot : ""
         }); 
         setFetchedAppointment({
             id : "",
@@ -88,7 +102,8 @@ export default function AppointmentForm({type}){
             date : "",
             timeSlot : ""
         });
-    }, [type])
+        console.log(inputState)
+    }, [type, loading])
     
     function verifyResident(){
         return true;
@@ -217,7 +232,7 @@ export default function AppointmentForm({type}){
                     <div className="form_item">
                         <label>Pick Time: </label>
                         <select required disabled={type == "Cancel"} name="timeSlots" value={type == "Make" ? inputState.timeSlot : fetchedAppointment.timeSlot} onChange={(e) => {type == "Make" ? setInputState(inputState => ({...inputState, timeSlot: e.target.value})) : setFetchedAppointment(fetchedAppointment => ({...fetchedAppointment, timeSlot: e.target.value}))}}>
-                            {timeSlots["timeSlots"].map((slot, index) => (
+                            {timeSlots.map((slot, index) => (
                                 <option key={index} value={slot}>{slot}</option>
                             ))}
                         </select>

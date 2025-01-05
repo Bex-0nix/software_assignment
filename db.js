@@ -1,6 +1,6 @@
 'use server'
 
-export async function apiRequestHandler(req, res, route, data){
+export async function apiRequestHandler(req, res, route, data, extra){
     try{
         if (req.method == "POST" || req.method == "PUT" || req.method == "DELETE"){
             const response = await submit(data, req.method, route)
@@ -17,7 +17,7 @@ export async function apiRequestHandler(req, res, route, data){
                 response = await getAll(route)
             }
             if (response.data){
-                res.status(200).json({data: response.data, message: response.message})
+                res.status(200).json({data: response.data, message: response.message, extra: extra})
             }
             else{
                 res.status(200).json({message: response.message || "Internal server error"})
@@ -50,6 +50,7 @@ export async function submit(data, method, route){
     }
     catch (error){
         console.log(error)
+        return "error"
     }
 }
 

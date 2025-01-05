@@ -2,26 +2,139 @@ import { submit, getAll, getSingle, getCustom, apiRequestHandler, getCurrentDate
 
 export default async function appointmentHandler(req, res) {
   const route = "appointments";
+  let extra = {}
+  let dailySlots = null;
   let appointment = req.body;
+  const {service, date} = req.query;
   if (req.method == "POST"){
     const timeSlotsData = await getAll("timeSlots");
-    const timeSlots = timeSlotsData.data[timeSlotsData.data.findIndex(elem => elem.service == appointment.service)]
+    const timeSlots = timeSlotsData.data[timeSlotsData.data.findIndex(elem => elem.service == appointment.service)];
     appointment["id"] = generateUniqueAppointmentId();
     checkDuplicateId();
     verifyResident();
     verifyDate();
     verifyTimeSlot(timeSlots["timeSlots"]);
-    updateSchedule(timeSlots["timeSlots"], timeSlots.serviceProviderCount);
   }
-  else if (req.method == "PUT"){
-    
+  else if (req.method == "PUT" || req.method == "DELETE"){
+    const appointmentData = getSingle("appointments", appointment.id);
+    if (!appointmentData.data){
+      res.status(200).json({message: "Invalid ID"})
+    }
   }
-  else if (req.method == "DELETE"){
+  else if (req.method == "GET"){
+    const timeSlotsData = await getAll("timeSlots");
+    const timeSlots = timeSlotsData.data[timeSlotsData.data.findIndex(elem => elem.service == service)];
+    const schedules = await getCustom("schedules", {key: "date", value: date})
+    if (schedules.data.length == 0){
+      dailySlots = [...timeSlots["timeSlots"]]
+    }
+    else{
+      const schedule = schedules.data[schedules.data.findIndex(elem => elem.service == service)]
+      dailySlots = deriveAvailableSlots(schedule.dailySlots);
+    }
+    extra["dailySlots"] = timeSlots["timeSlots"];
+    console.log(extra.dailySlots)
+  }
+  if (req.method != "GET"){
+    updateSchedule(timeSlots["timeSlots"], timeSlots.serviceProviderCount, timeSlots.lastUpdate.substring(0,10));
     
   }
   
-  apiRequestHandler(req, res, route, appointment);
+  apiRequestHandler(req, res, route, appointment, extra);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  async function updateSchedule(timeSlots, numberOfServiceProviders, lastUpdate){
+    const schedules = await getCustom("schedules", {key: "date", value: appointment.date})
+    let schedule = null;
+    // const timeSlots = await get
+    if (schedules.data.length == 0){
+      if (req.method == "POST"){
+        schedule = createNewSchedule(timeSlots, numberOfServiceProviders);
+        schedule = addAppointment(schedule, numberOfServiceProviders)
+        schedule.status = "open"
+        const scheduleResponse = await submit(schedule, req.method, "schedules");
+      }
+      else{
+        res.status(200).json({message: "Empty schedule"})
+      }
+    }
+    else{
+      schedule = schedules.data[schedules.data.findIndex(elem => elem.service == appointment.service)];
+      if (req.method == "DELETE"){
+        schedule = removeAppointment(schedule, id)
+        const scheduleResponse = await submit(schedule, "PUT", "schedules");
+      }
+      else if (req.method == "POST"){
+        schedule = addAppointment(schedule, numberOfServiceProviders);
+        const scheduleResponse = await submit(schedule, "PUT", "schedules");
+        
+      }
+      else if (req.method == "PUT"){
+        schedule = addAppointment(schedule, numberOfServiceProviders) 
+        const scheduleResponse = await submit(schedule, "PUT", "schedules");
+        const prevAppointmentData = await getSingle("appointments", appointment.id);
+        const prevAppointment = prevAppointmentData.data;
+        const prevScheduleData = await getCustom("schedules", {key: date, value: prevAppointment.date});
+        let prevSchedule = prevScheduleData.data[prevScheduleData.data.findIndex(elem => elem.service == prevAppointment.service)];
+        if (dateIsLessThan(lastUpdate, prevAppointment)){
+        }
+        else {
+          
+        }
+      }
+    }
+    
+  }
+
+  function createNewSchedule(timeSlots, numberOfServiceProviders){
+    let tempSlots = []
+    let arr = new Array(numberOfServiceProviders).fill("")
+    for (let timeSlot of timeSlots){
+      tempSlots.push([timeSlot, {
+        status: "empty",
+        appointments: arr
+      }])
+    }
+    return {
+      date: appointment.date,
+      service: appointment.service,
+      status: "empty",
+      updated: false,
+      dailySlots: tempSlots
+    }
+  }
   function generateUniqueAppointmentId(){
     let id = `${appointment.service[0]}${appointment.residentId.concat(appointment.date.concat(appointment.timeSlot)).match(/\d+/g).join('')}`;
     return id;
@@ -39,68 +152,21 @@ export default async function appointmentHandler(req, res) {
     }
   }
   function verifyTimeSlotAvailability(){
-
-  }
-  async function updateSchedule(timeSlots, no){
-
-    const schedules = await getCustom("schedules", {key: "date", value: appointment.date})
-    let schedule = schedules.data[schedules.data.findIndex(elem => elem.service == appointment.service)];
-    // const timeSlots = await get
-    if (schedules.data.length == 0){
-      if (req.method == "POST"){
-        schedule = createNewSchedule(timeSlots, no);
-        schedule = addAppointment(schedule)
-      }
-      else{
-        res.status(200).json({message: "Empty schedule"})
-      }
-    }
-    else{
-      if (req.method == "PUT"){
-        let prevAppointment = await getSingle("appointments", appointment.id);
-        const prevDate = prevAppointment.data.date;
-        const prevSchedules = await getCustom("schedules", {key: "date", value: prevDate});
-        const prevSchedule = prevSchedules[prevSchedules.findIndex(s => s.service == appointment.service)];
-        const prevDailySlots = prevSchedule.dailySlots;
-        
-        if (prevSchedule.updated){
-          for (let dailySlot of prevDailySlots){
-            let indeces = []
-            let index = 0;
-            for (let slots of dailySlot[1].appointments){
-              if (slots == appointment.id){
-                indeces.push(index);
-              }
-              index += 1;
-            }
-            if (indeces.length == 0){
-              continue;
-            }
-            if (dailySlot[1].recalculate){
-
-            }
-            else{
-  
-            }
-          }
-        }
-        else{
-          
-        }
-      }
-    }
-    submit(schedule, req.method, "schedules")
+    
   }
   function addAppointment(schedule){
-    let tempApps = schedule.dailySlots[schedule.dailySlots.findIndex(elem => elem[0] == appointment.timeSlot)][1].appointments;
-    console.log(tempApps)
-    for (let tempApp in tempApps){
-      if (tempApp == ""){
-        tempApp = appointment.id
+    let tempApps = [...schedule.dailySlots[schedule.dailySlots.findIndex(elem => elem[0] == appointment.timeSlot)][1].appointments];
+    console.log(schedule.dailySlots[schedule.dailySlots.findIndex(elem => elem[0] == appointment.timeSlot)][1].appointments)
+    for (let i = 0; i < tempApps.length; i++){
+      if (tempApps[i] == ""){
+        tempApps[i] = appointment.id
+        if (i == tempApps.length - 1){
+          schedule.dailySlots[schedule.dailySlots.findIndex(elem => elem[0] == appointment.timeSlot)][1].status = "full";
+        }
         break;
       }
     }
-    schedule.dailySlots[schedule.dailySlots.findIndex(elem => elem[0] == appointment.timeSlot)][1].appointments = tempApps;
+    schedule.dailySlots[schedule.dailySlots.findIndex(elem => elem[0] == appointment.timeSlot)][1].appointments = [...tempApps];
     return schedule;
   }
   function rearrangeSlots(timeSlots, dailySlots ){
@@ -111,11 +177,11 @@ export default async function appointmentHandler(req, res) {
         prevAppointmentSlots.push(dailySlot)
       }
     }
+    let arr = new Array(4).fill("")
     for (let timeSlot of timeSlots){
-      let arr = new Array(4).fill("")
       newDailySlots.push([timeSlot, {
         status: "empty",
-        appointments: arr
+        appointments: [...arr]
       }])
     }
     for (let elem in prevAppointmentSlots){
@@ -179,25 +245,8 @@ export default async function appointmentHandler(req, res) {
       return false;
     }
   }
-  function createNewSchedule(timeSlots, numberOfServiceProviders){
-    let tempSlots = []
-    let arr = new Array(numberOfServiceProviders).fill("")
-    for (let timeSlot of timeSlots){
-      tempSlots.push([timeSlot, {
-        status: "empty",
-        appointments: arr
-      }])
-    }
-    return {
-      date: appointment.date,
-      service: appointment.service,
-      status: "empty",
-      updated: false,
-      dailySlots: tempSlots
-    }
-  }
   async function verifyTimeSlot(timeSlots){
-
+    console.log(appointment.timeSlot)
     let found = false;
     for (let timeSlot of timeSlots){
       if (timeSlot[0] == appointment.timeSlot) found = true;  
@@ -229,4 +278,9 @@ export default async function appointmentHandler(req, res) {
     return diff;
   }
 
+  function dateIsLessThan(date1, date2){
+    let x = new Date(`${date1.month}/${date1.day}/${date1.year}`);
+    let y = new Date(`${date2.month}/${date2.day}/${date2.year}`);
+    return x - y < 0;
+  }
 }

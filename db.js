@@ -31,7 +31,7 @@ export async function apiRequestHandler(req, res, route, data, extra){
 
 export async function submit(data, method, route){
     try{
-        let url = `http://localhost:8002/${route}`
+        let url = `http://localhost:8000/${route}`
         method !== 'POST' ? url = url.concat(`/${data.id}`) : null; 
         const response = await fetch(url, {
             method: method,
@@ -56,7 +56,7 @@ export async function submit(data, method, route){
 
 export async function getAll(route){
     try{
-        let url = `http://localhost:8002/${route}`
+        let url = `http://localhost:8000/${route}`
         const response = await fetch(url, {
             method: "GET",
             headers: {
@@ -78,7 +78,7 @@ export async function getAll(route){
 
 export async function getSingle(route, id){
     try{
-        let url = `http://localhost:8002/${route}/${id}`
+        let url = `http://localhost:8000/${route}/${id}`
         const response = await fetch(url, {
             method: "GET",
             headers: {
@@ -104,7 +104,9 @@ export async function getCustom(route, customKey){
     const response = await getAll(route);
     if (response.data){
         for (let d of response.data){
-            if (d[customKey.key] == customKey.value) data.push(d);
+            if (d[customKey.key] == customKey.value){
+                data.push(d);
+            } 
         }
 
         return {

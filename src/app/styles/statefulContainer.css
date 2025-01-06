@@ -39,7 +39,7 @@
     top: 0;
     left: 0;
     border: none;
-    background-color: rgba(106, 45, 124, 0.959);
+    background-color: rgba(45, 123, 212, 0.959);
     overflow-y: hidden;
     overflow-x: scroll;
 }
@@ -70,6 +70,7 @@
     height: 40px;
     width: 15%;
     background-color: white;
+    border-radius: 5px;
     
 }
 .main_links>.link.active{
@@ -101,7 +102,7 @@
     color: white;
     border: 1px solid black;
     border-radius: 5px;
-    background-color: rgba(91, 14, 163, 0.932);
+    background-color: rgba(45, 123, 212, 0.932);
     text-align: center;
 }
 .alert .alert_title{
@@ -142,14 +143,14 @@
     padding: 1%;
     height: 90%;
     width: 95;
-    background-color: rgba(91, 14, 163, 0.062);
+    background-color: rgba(45, 123, 212, 0.062);
     overflow-y: scroll;
 }
 .form h1{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(53, 3, 53, 0.527);
+    background-color: rgba(45, 123, 212, 0.527);
     margin-bottom: 25px;
     height: 60px;
     border-radius: 10px;
@@ -163,7 +164,7 @@
     height: auto;
     min-height: 200px;
     max-height: 300px;
-    background-color: rgba(106, 45, 124, 0.479);
+    background-color: rgba(45, 123, 212, 0.479);
     border-radius: 10px;
     overflow: scroll;
     gap: 10px;
@@ -217,20 +218,20 @@ ul span{
     padding: 1%;
     height: 90%;
     width: 95;
-    background-color: rgba(91, 14, 163, 0.062);
+    background-color: rgba(45, 123, 212, 0.062);
 }
 .list h1{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(53, 3, 53, 0.527);
+    background-color: rgba(45, 123, 212, 0.527);
     margin-bottom: 25px;
     height: 60px;
     border-radius: 10px;
 }
 .list_item{
     position: relative;
-    background-color: rgba(128, 128, 128, 0.5);
+    background-color: rgba(45, 123, 212, 0.5);
     display: flex;
     flex-direction: column;
     min-height: 200px;

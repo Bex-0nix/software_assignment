@@ -52,12 +52,12 @@ export default function AppointmentForm({type}){
     useEffect(() => {
 
         async function load(){
-            const timeSlotResponse = await fetch("http://localhost:8002/timeSlots", {
+            const timeSlotResponse = await fetch("http://localhost:8000/timeSlots", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
                 }})
-            const requirementResponse = await fetch("http://localhost:8002/requirements", {
+            const requirementResponse = await fetch("http://localhost:8000/requirements", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -86,7 +86,11 @@ export default function AppointmentForm({type}){
         }
 
         load()
-    }, [service, inputState.date])
+    }, [service, inputState.date, type])
+
+    useEffect(() => {
+        cacheData();
+    }, [fetchedAppointment])
 
     useEffect(() => {
         setInputState({
@@ -133,10 +137,19 @@ export default function AppointmentForm({type}){
                 }
             }
             else if (type == "Reschedule"){
-                if (fetchedAppointment[data] != appointment[data]){
-                    setAlertContent(<Alert title={title} message={fetchedAppointment[data] == "" ? "Missing Input" : "Input Mismatch"} setAlertContent={setAlertContent}/>)
-                    return false;
+                if (data == "id"){
+                    if (fetchedAppointment[data] != appointment[data]){
+                        setAlertContent(<Alert title={title} message={fetchedAppointment[data] == "" ? "Missing Input" : "Input Mismatch"} setAlertContent={setAlertContent}/>)
+                        return false;
+                    }
                 }
+                else{
+                    if (fetchedAppointment[data] == ""){
+                        setAlertContent(<Alert title={title} message={fetchedAppointment[data] == "" ? "Missing Input" : "Input Mismatch"} setAlertContent={setAlertContent}/>)
+                        return false;
+                    }
+                }
+                console.log(appointment)
             }
             else if (type == "Cancel"){
                 if (fetchedAppointment["id"] != appointment["id"]){

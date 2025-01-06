@@ -26,7 +26,7 @@ body, html{
     width: 100%;
     background-color: rgba(0,0,0,0.3);
     z-index: -1;
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 .alert .alert_title{
     display: flex;
@@ -35,13 +35,13 @@ body, html{
     height: 25%;
     background-color: rgba(0, 0, 0, 0.849);
     border-bottom: 1px solid black;
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 .alert .alert_message{
     display: flex;
     align-items: center;
     justify-content: center;
     height: 75%;
-    pointer-events: none;
+    /* pointer-events: none; */
     font-size: 25px;
 }

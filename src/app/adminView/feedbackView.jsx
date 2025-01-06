@@ -6,9 +6,11 @@ export default function FeedbackView(){
     return (
         <div className="list">
             <h1>View Feedbacks</h1>
-            {feedbacks.map((feedback, index) => (
-                <FeedbackBlock key={index} feedback={feedback} />
-            ))}
+            <div className="list_cont">
+                {feedbacks.map((feedback, index) => (
+                    <FeedbackBlock key={index} feedback={feedback} />
+                ))}
+            </div>
         </div>
     )
 }

@@ -20,7 +20,7 @@ export async function apiRequestHandler(req, res, route, data, extra){
                 res.status(200).json({data: response.data, message: response.message, extra: extra})
             }
             else{
-                res.status(200).json({message: response.message || "Internal server error"})
+                res.status(500).json({message: response.message || "Internal server error"})
             }
         }
     }
@@ -31,7 +31,7 @@ export async function apiRequestHandler(req, res, route, data, extra){
 
 export async function submit(data, method, route){
     try{
-        let url = `http://localhost:8000/${route}`
+        let url = `https://ld5k32fj-8000.uks1.devtunnels.ms//${route}`
         method !== 'POST' ? url = url.concat(`/${data.id}`) : null; 
         const response = await fetch(url, {
             method: method,
@@ -42,10 +42,15 @@ export async function submit(data, method, route){
         })
 
         if (response.ok){
-            return `Submission Successful`
+            return {
+                data: data,
+                message: `Submission Successful`
+            }
         }
         else{
-            return `Submission Failed ${response.status} ${response.statusText}`
+            return {
+                message: `Submission Failed`
+            } 
         }
     }
     catch (error){
@@ -56,7 +61,7 @@ export async function submit(data, method, route){
 
 export async function getAll(route){
     try{
-        let url = `http://localhost:8000/${route}`
+        let url = `https://ld5k32fj-8000.uks1.devtunnels.ms//${route}`
         const response = await fetch(url, {
             method: "GET",
             headers: {
@@ -78,7 +83,7 @@ export async function getAll(route){
 
 export async function getSingle(route, id){
     try{
-        let url = `http://localhost:8000/${route}/${id}`
+        let url = `https://ld5k32fj-8000.uks1.devtunnels.ms//${route}/${id}`
         const response = await fetch(url, {
             method: "GET",
             headers: {

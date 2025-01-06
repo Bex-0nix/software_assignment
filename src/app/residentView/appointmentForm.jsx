@@ -11,7 +11,6 @@ export default function AppointmentForm({type}){
     const [loading, setLoading] = useState(true);
     const services = ["certificateIssue", "idIssue"] //should be fetched from "db"
     const [alertContent, setAlertContent] = useState(null);
-    const [service, setService] = useState(services[0]);
     const [reqs, setReqs] = useState([]);
 
     function getCurrentDate() {
@@ -24,19 +23,9 @@ export default function AppointmentForm({type}){
         }
     }
 
-    useEffect(() => {
-        if (requirements.length > 0) {
-            const selectedReq = requirements.find((req) => req.service === service);
-            if (selectedReq) {
-                setReqs(selectedReq.requirements);
-            }
-        }    
-    }, [service, requirements])
-    
-    
     const [inputState, setInputState] = useState({
         residentId : "",
-        service : service,
+        service : services[0],
         date : getCurrentDate().date,
         timeSlot : "",
     })
@@ -44,25 +33,36 @@ export default function AppointmentForm({type}){
     const [fetchedAppointment, setFetchedAppointment] = useState({
         id : "",
         residentId : "",
-        service : "",
-        date : "",
+        service : services[0],
+        date : getCurrentDate().date,
         timeSlot : "",
     })
     
+
+    useEffect(() => {
+        if (requirements.length > 0) {
+            const selectedReq = requirements.find((req) => req.service === inputState.service);
+            if (selectedReq) {
+                setReqs(selectedReq.requirements);
+            }
+        }    
+    }, [inputState.service, requirements])
+
     useEffect(() => {
 
         async function load(){
-            const timeSlotResponse = await fetch("http://localhost:8000/timeSlots", {
+            const timeSlotResponse = await fetch("https://ld5k32fj-8000.uks1.devtunnels.ms/timeSlots", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
                 }})
-            const requirementResponse = await fetch("http://localhost:8000/requirements", {
+            const requirementResponse = await fetch("https://ld5k32fj-8000.uks1.devtunnels.ms/requirements", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
                 }})
-            const appointmentResponse = await fetch(`/api/appointment?service=${encodeURIComponent(service)}&date=${encodeURIComponent(inputState.date)}`, {
+            let url = `/api/appointment?service=${encodeURIComponent(type == "Make" ? inputState.service : fetchedAppointment.service)}&date=${encodeURIComponent(type == "Make" ? inputState.date : fetchedAppointment.date)}`
+            const appointmentResponse = await fetch(url, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -72,7 +72,7 @@ export default function AppointmentForm({type}){
                 let appointmentData = await appointmentResponse.json()
                 let requirementData = await requirementResponse.json()
                 let timeSlotData = await timeSlotResponse.json()
-                console.log()
+                console.log("hello")
                 setAppointments(appointmentData.data)
                 setRequirements(requirementData)
                 setTimeSlots(appointmentData.extra.dailySlots)
@@ -86,7 +86,7 @@ export default function AppointmentForm({type}){
         }
 
         load()
-    }, [service, inputState.date, type])
+    }, [inputState.service, inputState.date, fetchedAppointment.service, fetchedAppointment.date, type])
 
     useEffect(() => {
         cacheData();
@@ -95,15 +95,15 @@ export default function AppointmentForm({type}){
     useEffect(() => {
         setInputState({
             residentId : "",
-            service : service,
+            service : services[0],
             date : getCurrentDate().date,
             timeSlot : ""
         }); 
         setFetchedAppointment({
             id : "",
             residentId : "",
-            service : "",
-            date : "",
+            service : services[0],
+            date : getCurrentDate().date,
             timeSlot : ""
         });
         console.log(inputState)
@@ -179,7 +179,7 @@ export default function AppointmentForm({type}){
       
             const data = await response.json();
             if (response.ok) {
-              message = (data.message);
+              message = (data.message.message + "\nAppointment identifier: " + data.message.data.id);
             } else {
               message = (data.message || 'Error submitting appointment');
             }
@@ -216,19 +216,19 @@ export default function AppointmentForm({type}){
                         :
                         null
                     }
-                    <div className="form_item">
-                        <label>ID: </label>
-                            <input required disabled={type == "Cancel"} type="text" name="id" value={type == "Make" ? inputState.residentId : fetchedAppointment.residentId} onChange={(e) => {type == "Make" ? setInputState(inputState => ({...inputState, residentId: e.target.value})) : setFetchedAppointment(fetchedAppointment => ({...fetchedAppointment, residentId: e.target.value}))}}/>
-                    </div>
-                    <div className="form_item">
-                        <label>Service: </label>
-                        <select required disabled={type == "Cancel"} name="service" value={type == "Make" ? service : fetchedAppointment.service} onChange={(e) => {type == "Make" ? setService(e.target.value) : setFetchedAppointment(fetchedAppointment => ({...fetchedAppointment, service: e.target.value}))}}>
-                            {services.map((service, index) => (
-                                <option key={index} value={service}>{service}</option>
-                            ))}
-                        </select>
-                    </div>
-                    {type == "Make" && (
+                    {type == "Make" && (<>
+                        <div className="form_item">
+                            <label>ID: </label>
+                                <input required disabled={type == "Cancel"} type="text" name="id" value={type == "Make" ? inputState.residentId : fetchedAppointment.residentId} onChange={(e) => {type == "Make" ? setInputState(inputState => ({...inputState, residentId: e.target.value})) : setFetchedAppointment(fetchedAppointment => ({...fetchedAppointment, residentId: e.target.value}))}}/>
+                        </div>
+                        <div className="form_item">
+                            <label>Service: </label>
+                            <select required disabled={type == "Cancel"} name="service" value={type == "Make" ? inputState.service : fetchedAppointment.service} onChange={(e) => {type == "Make" ? setInputState(inputState => ({...inputState, service: e.target.value})) : setFetchedAppointment(fetchedAppointment => ({...fetchedAppointment, service: e.target.value}))}}>
+                                {services.map((service, index) => (
+                                    <option key={index} value={service}>{service}</option>
+                                ))}
+                            </select>
+                        </div>
                         <div className="form_item">
                             <ul>
                                 <label><big> Requirements: </big></label>
@@ -237,7 +237,7 @@ export default function AppointmentForm({type}){
                                 ))}
                             </ul>
                         </div>
-                    )}
+                    </>)}
                     <div className="form_item">
                         <label>Date: </label>
                         <input required disabled={type == "Cancel"} type="date" value={type == "Make" ? inputState.date : fetchedAppointment.date} onChange={(e) => {type == "Make" ? setInputState(inputState => ({...inputState, date: e.target.value})) : setFetchedAppointment(fetchedAppointment => ({...fetchedAppointment, date: e.target.value}))}}/>

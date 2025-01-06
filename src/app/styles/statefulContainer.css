@@ -119,8 +119,8 @@
     align-items: center;
     justify-content: center;
     height: 75%;
-    pointer-events: none;
     font-size: 25px;
+    pointer-events: none;
 }
 .alert::before{
     content: '';
@@ -131,7 +131,7 @@
     width: 100%;
     background-color: rgba(0,0,0,0.3);
     z-index: -1;
-    pointer-events: none;
+    /* pointer-events: none; */
 }
 ::-webkit-scrollbar{
     width: 0px;
@@ -220,6 +220,13 @@ ul span{
     width: 95;
     background-color: rgba(45, 123, 212, 0.062);
 }
+.list_cont{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    row-gap: 20px;
+    width: 100%;
+    height: 100%;
+}
 .list h1{
     display: flex;
     align-items: center;
@@ -232,14 +239,40 @@ ul span{
 .list_item{
     position: relative;
     background-color: rgba(45, 123, 212, 0.5);
+    padding: 10px;
     display: flex;
     flex-direction: column;
+    row-gap: 10px;
     min-height: 200px;
     height: auto;
     max-height: 300px;
-    width: 100%;
+    width: 400px;
+    max-width: 90%;
     overflow: scroll;
+    border: white 2px solid;
+}
+.list_item_links{
+    background-color: white;
+    position: sticky;
+    display: flex;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
 }
 .list_item_piece{
     display: flex;
+    gap: 10px;
+    font-size: 20px;
 }
+.router{
+    background-color: white;
+    width: 50%;
+}
+.list_item::-webkit-scrollbar{
+    width: 5px;
+    background-color: white;
+} 
+.list_item::-webkit-scrollbar-thumb{
+    width: 5px;
+    background-color: black;
+} 

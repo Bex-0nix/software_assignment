@@ -6,13 +6,13 @@ export default function ResidentListItem({resident}){
         <div className="list_item">
             {Object.keys(resident).map((key) => (
                 <div className="list_item_piece">
-                    <label>{key}</label>
-                    <h3>{resident[key]}</h3>
+                    <label>{key.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/^([a-z])/, (match) => match.toUpperCase())}:</label>
+                    <h4>{resident[key]}</h4>
                 </div>
             ))}
             <div className="list_item_links">
-                <RouterButton className="link" route="Edit" data={passedId}>Edit</RouterButton>
-                <RouterButton className="link" route="Remove" data={passedId}>Remove</RouterButton>
+                <RouterButton route="Edit" className="router" data={passedId}>Edit</RouterButton>
+                <RouterButton route="Remove" className="router" data={passedId}>Remove</RouterButton>
             </div>
 
         </div>

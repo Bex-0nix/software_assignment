@@ -41,7 +41,71 @@
       "dateOfRegistration": "sdafsadfsdaf"
     }
   ],
-  "appointments": [],
+  "appointments": [
+    {
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-01-06",
+      "timeSlot": "03:00 AM - 03:29 AM",
+      "id": "c123452025010602300259"
+    },
+    {
+      "id": "c123462025010602300259",
+      "residentId": "12346",
+      "service": "certificateIssue",
+      "date": "2025-01-06",
+      "timeSlot": "02:30 AM - 02:59 AM"
+    },
+    {
+      "id": "c123452025010605000529",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-01-06",
+      "timeSlot": "05:00 AM - 05:29 AM"
+    },
+    {
+      "id": "c123452025010609300959",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-01-06",
+      "timeSlot": "09:30 AM - 09:59 AM"
+    },
+    {
+      "id": "c123452025010608000829",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-01-06",
+      "timeSlot": "08:00 AM - 08:29 AM"
+    },
+    {
+      "id": "c123452025010604000429",
+      "residentId": "12345",
+      "service": "certificateIssue",
+      "date": "2025-01-06",
+      "timeSlot": "04:00 AM - 04:29 AM"
+    },
+    {
+      "id": "c123462025010605000529",
+      "residentId": "12346",
+      "service": "certificateIssue",
+      "date": "2025-01-06",
+      "timeSlot": "05:00 AM - 05:29 AM"
+    },
+    {
+      "id": "i123452025010602300249",
+      "residentId": "12345",
+      "service": "idIssue",
+      "date": "2025-01-06",
+      "timeSlot": "02:30 AM - 02:49 AM"
+    },
+    {
+      "id": "i123452025010608100829",
+      "residentId": "12345",
+      "service": "idIssue",
+      "date": "2025-01-06",
+      "timeSlot": "08:10 AM - 08:29 AM"
+    }
+  ],
   "cancelledAppointments": [],
   "requirements": [
     {
@@ -136,7 +200,488 @@
     }
   ],
   "schedules": [
-
+    {
+      "id": "dcc7",
+      "date": "2025-01-06",
+      "service": "certificateIssue",
+      "status": "open",
+      "updated": false,
+      "dailySlots": [
+        [
+          "02:30 AM - 02:59 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "c123462025010602300259",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "03:00 AM - 03:29 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "c123452025010602300259",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "03:30 AM - 03:59 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "04:00 AM - 04:29 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "c123452025010604000429",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "04:30 AM - 04:59 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "05:00 AM - 05:29 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "c123452025010605000529",
+              "c123462025010605000529",
+              ""
+            ]
+          }
+        ],
+        [
+          "05:30 AM - 05:59 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "06:00 AM - 06:29 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "07:30 AM - 07:59 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "08:00 AM - 08:29 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "c123452025010608000829",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "08:30 AM - 08:59 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "09:00 AM - 09:29 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "09:30 AM - 09:59 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "c123452025010609300959",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "10:00 AM - 10:29 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "10:30 AM - 10:59 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "11:00 AM - 11:29 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "id": "2534",
+      "date": "2025-01-06",
+      "service": "idIssue",
+      "status": "open",
+      "updated": false,
+      "dailySlots": [
+        [
+          "02:30 AM - 02:49 AM",
+          {
+            "status": "open",
+            "appointments": [
+              "i123452025010602300249",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "02:50 AM - 03:09 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "03:10 AM - 03:29 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "03:30 AM - 03:49 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "03:50 AM - 04:09 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "04:10 AM - 04:29 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "04:30 AM - 04:49 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "04:50 AM - 05:09 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "05:10 AM - 05:29 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "05:30 AM - 05:49 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "05:50 AM - 06:09 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "06:10 AM - 06:29 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "07:30 AM - 07:49 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "07:50 AM - 08:09 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "08:10 AM - 08:29 AM",
+          {
+            "status": "open",
+            "appointments": [
+              "i123452025010608100829",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "08:30 AM - 08:49 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "08:50 AM - 09:09 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "09:10 AM - 09:29 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "09:30 AM - 09:49 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "09:50 AM - 10:09 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "10:10 AM - 10:29 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "10:30 AM - 10:49 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "10:50 AM - 11:09 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ],
+        [
+          "11:10 AM - 11:29 AM",
+          {
+            "status": "empty",
+            "appointments": [
+              "",
+              "",
+              "",
+              ""
+            ]
+          }
+        ]
+      ]
+    }
   ],
   "feedBacks": [
     {

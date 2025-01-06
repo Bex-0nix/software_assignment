@@ -1,3 +1,4 @@
+'use server'
 import { submit, getAll, getSingle, getCustom, apiRequestHandler, getCurrentDate } from '../../db';
 
 export default async function appointmentHandler(req, res) {
@@ -36,7 +37,7 @@ export default async function appointmentHandler(req, res) {
     }
     else{
       const schedule = schedules.data[schedules.data.findIndex(elem => elem.service == service)]
-      dailySlots = deriveAvailableSlots(schedule.dailySlots);
+      schedule ? dailySlots = deriveAvailableSlots(schedule.dailySlots) : dailySlots = [...timeSlots["timeSlots"]];
     }
     extra["dailySlots"] = timeSlots["timeSlots"];
   }
@@ -45,38 +46,7 @@ export default async function appointmentHandler(req, res) {
   }
   
   apiRequestHandler(req, res, route, appointment, extra);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  return;
 
   async function validateData(timeSlot){
     let message = null;
@@ -91,7 +61,8 @@ export default async function appointmentHandler(req, res) {
   async function updateSchedule(timeSlots, numberOfServiceProviders, lastUpdate){
     const schedules = await getCustom("schedules", {key: "date", value: appointment.date})
     let schedule = null;
-    if (schedules.data.length == 0){
+    schedule = schedules.data[schedules.data.findIndex(elem => elem.service == appointment.service)];
+    if (!schedule){
       if (req.method == "POST"){
         schedule = createNewSchedule(timeSlots, numberOfServiceProviders);
         schedule = addAppointment(schedule, numberOfServiceProviders)
@@ -106,21 +77,24 @@ export default async function appointmentHandler(req, res) {
       }
     }
     else{
-      schedule = schedules.data[schedules.data.findIndex(elem => elem.service == appointment.service)];
-      const error = verifyTimeSlotAvailability(schedule)
-      if (error) return error
       if (req.method == "DELETE"){
         schedule = removeAppointment(schedule, appointment.id, appointment.timeSlot, dateIsLessThan(lastUpdate, appointment.date))
         const scheduleResponse = await submit(schedule, "PUT", "schedules");
-        if (!scheduleResponse.data) return scheduleResponse.message
+        if (!scheduleResponse.data) return scheduleResponse.message;
+        const cancelResponse =  await submit(appointment, "POST", "cancelledAppointments");
+        if (!cancelResponse.data) return cancelResponse.message;
       }
       else if (req.method == "POST"){
+        const error = verifyTimeSlotAvailability(schedule)
+        if (error) return error
         schedule = addAppointment(schedule, numberOfServiceProviders);
         const scheduleResponse = await submit(schedule, "PUT", "schedules");
         if (!scheduleResponse.data) return scheduleResponse.message
         
       }
       else if (req.method == "PUT"){
+        const error = verifyTimeSlotAvailability(schedule)
+        if (error) return error
         console.log(appointment)
         const prevAppointmentData = await getSingle("appointments", appointment.id);
         if (!prevAppointmentData.data) return prevAppointmentData.message
@@ -184,6 +158,7 @@ export default async function appointmentHandler(req, res) {
     for (let i = 0; i < tempApps.length; i++){
       if (tempApps[i] == ""){
         tempApps[i] = appointment.id
+        schedule.dailySlots[schedule.dailySlots.findIndex(elem => elem[0] == appointment.timeSlot)][1].status = "open"
         if (i == tempApps.length - 1){
           schedule.dailySlots[schedule.dailySlots.findIndex(elem => elem[0] == appointment.timeSlot)][1].status = "full";
         }
@@ -198,6 +173,16 @@ export default async function appointmentHandler(req, res) {
       console.log(schedule)
       let appointments = schedule.dailySlots[schedule.dailySlots.findIndex(elem => elem[0] == timeSlot)][1].appointments
       appointments[appointments.findIndex(elem => elem == id)] = "";
+      schedule.dailySlots[schedule.dailySlots.findIndex(elem => elem[0] == timeSlot)][1].status = "open"
+      let empty = false;
+      for (let appointment of appointments){
+        if (appointment != ""){
+          empty = true;
+        }
+      }
+      if (empty) {
+        schedule.dailySlots[schedule.dailySlots.findIndex(elem => elem[0] == timeSlot)][1].status = "empty"
+      }
     }
     else{
       let updatedAppointments = schedule.updatedAppointments; 

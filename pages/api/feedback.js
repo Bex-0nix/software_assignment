@@ -1,4 +1,4 @@
-import {getSingle, getAll, getCustom, apiRequestHandler} from "../../../db"
+import {getSingle, getAll, getCustom, apiRequestHandler} from "../../db"
 
 export default async function feedbackHandler(req, res){
     const route = "feedbacks";

@@ -1,4 +1,4 @@
-import {getSingle, getAll, getCustom, apiRequestHandler} from "../../../db"
+import {getSingle, getAll, getCustom, apiRequestHandler} from "../../db"
 
 export default async function requirementHandler(req, res){
     const route = "requirements";

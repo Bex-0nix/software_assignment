@@ -1,4 +1,4 @@
-import { getAll, getSingle, getCustom, apiRequestHandler, submit } from "../../../db";
+import { getAll, getSingle, getCustom, apiRequestHandler, submit } from "../../db";
 
 export default async function timeSlotHandler(req, res){
     const services = ['certificateIssue, idIssue']

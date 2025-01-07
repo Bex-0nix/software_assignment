@@ -1,5 +1,5 @@
 'use server'
-import { submit, getAll, getSingle, getCustom, apiRequestHandler, getCurrentDate } from '../../db';
+import { submit, getAll, getSingle, getCustom, apiRequestHandler, getCurrentDate } from '../../../db';
 
 export default async function appointmentHandler(req, res) {
   const route = "appointments";

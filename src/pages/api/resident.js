@@ -1,4 +1,4 @@
-import { submit, getAll, getSingle, apiRequestHandler } from "../../db"
+import { submit, getAll, getSingle, apiRequestHandler } from "../../../db"
 
 export default async function residentHandler(req, res){
     const route = "residents";

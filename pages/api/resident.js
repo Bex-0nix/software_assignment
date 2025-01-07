@@ -3,7 +3,7 @@ import { submit, getAll, getSingle, apiRequestHandler } from "../../db"
 export default async function residentHandler(req, res){
     const route = "residents";
     let resident = req.body;
-    
+    console.log
     const verificationData = getSingle("residents", resident.id);
     const verification = verificationData.data;
     if (req.method == "POST"){
@@ -18,7 +18,9 @@ export default async function residentHandler(req, res){
         
     }
     else{
-        res.status(200).json({message: "Method not supported"})
+        if (req.method != "GET"){
+            res.status(200).json({message: "Method not supported"})
+        }
     }
     
     

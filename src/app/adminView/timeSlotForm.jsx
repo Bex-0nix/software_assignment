@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-// import timeSlots from "./timeslots.JSON"
 import Alert from "../alert/alert";
 
 let timeSlot = {};
 
 export default function TimeSlotForm(){
-    const services = ["certificateIssue", "idIssue"];//"fetched from db"
+
+    const services = ["certificateIssue", "idIssue"];
     
     const [alertContent, setAlertContent] = useState(null);
     
@@ -64,11 +64,20 @@ export default function TimeSlotForm(){
         updateIntervals([]);
         setExcludedIndeces([]);
     }
-    function handleSubmit(){
-        const savedData = timeSlot;
-        console.log(savedData);
-        clearData();
-        setAlertContent(<Alert title="Form submitted" message="Timeslot updated" setAlertContent={setAlertContent}/>)
+    async function handleSubmit(){
+        const response = await fetch('/api/timeSlot', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: timeSlot 
+        })
+        if (response.ok){
+            setAlertContent(<Alert title="Form submitted" message={response.message} setAlertContent={setAlertContent}/>)
+        }
+        else{
+            setAlertContent(<ALert title="Form Error" message={response.message} setAlertContent={setAlertContent}/>)
+        }
     }
 
     const [inputState, setInputState] = useState({

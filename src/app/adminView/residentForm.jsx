@@ -23,11 +23,13 @@ const data = [
     ["dateOfRegistration" , "Registration Date", "date"]
 ]
 
-export default function ResidentForm({type, residents, handleSubmit}){
+export default function ResidentForm({type}){
     const {contents} = useStatefulContainer();
     
+    const [residents, setResidents] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [submitted, setSubmitted] = useState(true)
     const [fetchedResident, setFetchedResident] = useState(contents["data"] ? residents[residents.findIndex(resident => resident["id"] == contents["data"])] : {});
-    
     const [inputState, setInputState] = useState({
         id: contents["data"] || "",
         fullName: "",
@@ -49,6 +51,30 @@ export default function ResidentForm({type, residents, handleSubmit}){
         dateOfRegistration: ""
     })
     
+    useEffect(() => {
+        async function load(){
+            try {
+                const response = await fetch('/api/resident', {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                if (response.ok){
+                    let residentData = await response.json()
+                    setResidents(residentData.data)
+                    setLoading(false)
+                }
+                else{
+                    setAlertContent(<Alert title="Form Error" message={response.message}/>)
+                }
+            } catch (error) {
+                setAlertContent(<Alert title="Form Error" message={error.message}/>)
+            }
+        }
+        load();
+    }, [type, submitted])
+
     useEffect(() => {
         return () => {
             setFetchedResident({});
@@ -74,7 +100,7 @@ export default function ResidentForm({type, residents, handleSubmit}){
             })
             contents["data"] = null;
         }
-    }, [type])
+    }, [type, submitted])
 
     const [alertContent, setAlertContent] = useState(null);
 
@@ -85,7 +111,8 @@ export default function ResidentForm({type, residents, handleSubmit}){
                 return false;
             }
         }
-        data.unshift("id");
+        console.log(data)
+        data.unshift(["id", "hey", "nope"]);
         for (let d of data) {
             if ((inputState[d[0]] == "" && type == "Add") || (d[0] != "id" && fetchedResident[d[0]] == "" && type == "Edit")) {
                 data.shift()
@@ -93,14 +120,39 @@ export default function ResidentForm({type, residents, handleSubmit}){
                 return false;
             }
             type == "Add" ? resident[d[0]] = inputState[d[0]] : resident[d[0]] = fetchedResident[d[0]];  
+            console.log(resident[d[0]])
         }
         data.shift()
         return true;
     }
     
+    async function handleSubmit(event, type, resident){
+        event.preventDefault();
+        const method = type == "Add" ? "POST" : type == "Cancel" ? "DELETE" : "PUT";
+        console.log(resident)
+        const response = await fetch('/api/resident', ({
+            method: method,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(resident)
+        }))
+        if (response.ok){
+            setAlertContent(<Alert title="Form Submitted" message={response.message} setAlertContent={setAlertContent} />)
+            setSubmitted(!submitted)
+        }
+        else{
+
+            setAlertContent(<Alert title="Form Error" message={response.message} setAlertContent={setAlertContent} />)
+        }
+        
+    }
+
     return (
         <>
-            {alertContent}
+        {alertContent}
+        {!loading &&
+
             <div className="form resident_form">
                 <h1>{type} Resident</h1>
                 <br />
@@ -156,6 +208,7 @@ export default function ResidentForm({type, residents, handleSubmit}){
                     </div>
                 </form>
             </div>
+        }
         </>
     )
 }

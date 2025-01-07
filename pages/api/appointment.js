@@ -102,7 +102,6 @@ export default async function appointmentHandler(req, res) {
         console.log(prevAppointment.date)
         const prevScheduleData = await getCustom("schedules", {key: "date", value: prevAppointment.date});
         console.log(prevScheduleData.data[0])
-        // const prevScheduleData = await getAll("schedules");
         if (!prevScheduleData.data) return prevScheduleData.message
         let prevSchedule = prevScheduleData.data[prevScheduleData.data.findIndex(elem => elem.service == prevAppointment.service)];
         prevSchedule = removeAppointment(prevSchedule, prevAppointment.id, prevAppointment.timeSlot, dateIsLessThan(lastUpdate, prevAppointment.date))
